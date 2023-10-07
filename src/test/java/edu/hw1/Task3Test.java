@@ -7,26 +7,38 @@ import static org.assertj.core.api.AssertionsForClassTypes.assertThat;
 
 public class Task3Test {
     @Test
-    @DisplayName("First case of a nested array")
-    void nested1() {
+    @DisplayName("Empty array is never able to nest another one")
+    void emptyNest() {
+        assertThat(isNestable(new int[]{1, 2, 3, 4}, new int[]{})).isFalse();
+    }
+
+    @Test
+    @DisplayName("Empty array is always nestable (except for the case above)")
+    void emptyNestable() {
+        assertThat(isNestable(new int[]{}, new int[]{0, 6})).isTrue();
+    }
+
+    @Test
+    @DisplayName("First case of a nestable array")
+    void nestable1() {
         assertThat(isNestable(new int[]{1, 2, 3, 4}, new int[]{0, 6})).isTrue();
     }
 
     @Test
-    @DisplayName("First case of a nested array")
-    void nested2() {
+    @DisplayName("Second case of a nestable array")
+    void nestable2() {
         assertThat(isNestable(new int[]{3, 1}, new int[]{4, 0})).isTrue();
     }
 
     @Test
-    @DisplayName("First case of a nested array")
-    void notNested1() {
+    @DisplayName("First case of a non-nestable array")
+    void notNestable1() {
         assertThat(isNestable(new int[]{9, 9, 8}, new int[]{8, 9})).isFalse();
     }
 
     @Test
-    @DisplayName("First case of a nested array")
-    void notNested2() {
+    @DisplayName("Second case of a non-nestable array")
+    void notNestable2() {
         assertThat(isNestable(new int[]{1, 2, 3, 4}, new int[]{2, 3})).isFalse();
     }
 }
