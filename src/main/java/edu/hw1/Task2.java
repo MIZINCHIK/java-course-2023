@@ -6,8 +6,8 @@ public class Task2 {
     }
 
     public static int countDigits(long number) {
-        int result = 0;
-        while (number > 0) {
+        int result = 1;
+        while (number > 10) {
             result++;
             number /= 10;
         }
