@@ -12,7 +12,7 @@ public class Task1Test {
     void secondsOverflow() {
         long seconds = minutesToSeconds("00:60");
         assertThat(seconds)
-                .isEqualTo(-1);
+            .isEqualTo(-1);
     }
 
     @Test
@@ -20,7 +20,7 @@ public class Task1Test {
     void secondsEdge() {
         long seconds = minutesToSeconds("00:59");
         assertThat(seconds)
-                .isEqualTo(59);
+            .isEqualTo(59);
     }
 
     @Test
@@ -28,7 +28,7 @@ public class Task1Test {
     void secondsNegative() {
         long seconds = minutesToSeconds("00:-01");
         assertThat(seconds)
-                .isEqualTo(-1);
+            .isEqualTo(-1);
     }
 
     @Test
@@ -36,7 +36,7 @@ public class Task1Test {
     void secondsSingleDigit() {
         long seconds = minutesToSeconds("00:1");
         assertThat(seconds)
-                .isEqualTo(-1);
+            .isEqualTo(-1);
     }
 
     @Test
@@ -44,7 +44,7 @@ public class Task1Test {
     void secondsThreeDigits() {
         long seconds = minutesToSeconds("00:001");
         assertThat(seconds)
-                .isEqualTo(-1);
+            .isEqualTo(-1);
     }
 
     @Test
@@ -52,7 +52,7 @@ public class Task1Test {
     void resultNegative() {
         long seconds = minutesToSeconds("-100:00");
         assertThat(seconds)
-                .isEqualTo(-6000);
+            .isEqualTo(-6000);
     }
 
     @Test
@@ -60,7 +60,7 @@ public class Task1Test {
     void resultLarge() {
         long seconds = minutesToSeconds("2147483647:00");
         assertThat(seconds)
-                .isEqualTo(2147483647L * 60);
+            .isEqualTo(2147483647L * 60);
     }
 
     @Test
@@ -68,6 +68,6 @@ public class Task1Test {
     void resultZero() {
         long seconds = minutesToSeconds("00:00");
         assertThat(seconds)
-                .isEqualTo(0);
+            .isEqualTo(0);
     }
 }
