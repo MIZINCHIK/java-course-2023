@@ -64,7 +64,7 @@ public class Task1Test {
     }
 
     @Test
-    @DisplayName("Result overflowing int")
+    @DisplayName("0 seconds on input")
     void resultZero() {
         long seconds = minutesToSeconds("00:00");
         assertThat(seconds)
