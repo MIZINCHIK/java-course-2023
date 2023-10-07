@@ -7,7 +7,7 @@ import static edu.hw1.Task2.BASE;
 
 public class Task6 {
     private static final int UPPER_LIMIT = 9999;
-    private static final int LOWER_LIMIT = 1000;
+    private static final int LOWER_LIMIT = 1001;
     private static final int KAPREKAR = 6174;
 
     private Task6() {
