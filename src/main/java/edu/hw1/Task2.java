@@ -1,7 +1,7 @@
 package edu.hw1;
 
 public class Task2 {
-    private static final int BASE = 10;
+    public static final int BASE = 10;
 
     private Task2() {
         throw new IllegalStateException();
