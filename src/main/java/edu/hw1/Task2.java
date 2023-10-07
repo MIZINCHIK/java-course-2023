@@ -1,15 +1,18 @@
 package edu.hw1;
 
 public class Task2 {
+    private static final int BASE = 10;
+
     private Task2() {
         throw new IllegalStateException();
     }
 
     public static int countDigits(double number) {
+        double left = number;
         int result = 1;
-        while (number > 10) {
+        while (left > BASE) {
             result++;
-            number /= 10;
+            left /= BASE;
         }
         return result;
     }
