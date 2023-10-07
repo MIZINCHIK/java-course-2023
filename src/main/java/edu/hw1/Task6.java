@@ -7,7 +7,7 @@ import static edu.hw1.Task2.BASE;
 
 public class Task6 {
     private static final int UPPER_LIMIT = 9999;
-    private static final int LOWER_LIMIT = 1001;
+    private static final int LOWER_LIMIT = 1000;
     private static final int KAPREKAR = 6174;
 
     private Task6() {
@@ -15,9 +15,6 @@ public class Task6 {
     }
 
     public static int countK(int number) {
-        if (number < LOWER_LIMIT || number > UPPER_LIMIT) {
-            throw new IllegalArgumentException("Not a 4-digit int!");
-        }
         if (number == KAPREKAR) {
             return 0;
         }
@@ -30,6 +27,9 @@ public class Task6 {
         while (initial > 0) {
             digits.add(initial % BASE);
             initial /= BASE;
+        }
+        while (digits.size() < 4) {
+            digits.add(0);
         }
         if (ascending) {
             Collections.sort(digits);

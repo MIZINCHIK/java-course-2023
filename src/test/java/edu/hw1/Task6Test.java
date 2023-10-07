@@ -7,6 +7,18 @@ import static org.assertj.core.api.AssertionsForClassTypes.assertThat;
 
 public class Task6Test {
     @Test
+    @DisplayName("Number of iterations for 1000 (less than 1000 after the first one)")
+    void lessThan4Digits1() {
+        assertThat(countK(1000)).isEqualTo(5);
+    }
+
+    @Test
+    @DisplayName("Number of iterations for 9998 (less than 1000 after the first one)")
+    void lessThan4Digits2() {
+        assertThat(countK(9998)).isEqualTo(5);
+    }
+
+    @Test
     @DisplayName("Number of iterations for the Kaprekar number itself")
     void numberKaprekar() {
         assertThat(countK(6174)).isEqualTo(0);
