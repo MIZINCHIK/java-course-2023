@@ -6,9 +6,8 @@ import java.util.List;
 import static edu.hw1.Task2.BASE;
 
 public class Task6 {
-    private static final int UPPER_LIMIT = 9999;
-    private static final int LOWER_LIMIT = 1000;
     private static final int KAPREKAR = 6174;
+    private static final int DIGIT_AMT_REQ = 4;
 
     private Task6() {
         throw new IllegalStateException();
@@ -28,7 +27,7 @@ public class Task6 {
             digits.add(initial % BASE);
             initial /= BASE;
         }
-        while (digits.size() < 4) {
+        while (digits.size() < DIGIT_AMT_REQ) {
             digits.add(0);
         }
         if (ascending) {
