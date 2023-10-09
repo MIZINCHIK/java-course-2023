@@ -7,8 +7,8 @@ public class Task2 {
         throw new IllegalStateException();
     }
 
-    public static int countDigits(double number) {
-        double left = number;
+    public static int countDigits(long number) {
+        long left = number;
         int result = 1;
         while (left > BASE) {
             result++;

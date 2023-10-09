@@ -21,12 +21,12 @@ public class Task2Test {
     @Test
     @DisplayName("Case of counting digits in an Integer.MAX_VALUE")
     void intOverflow() {
-        assertThat(countDigits(2147483647)).isEqualTo(10);
+        assertThat(countDigits(Integer.MAX_VALUE)).isEqualTo(10);
     }
 
     @Test
-    @DisplayName("Case of counting digits in a number exceeding Long.MAX_VALUE")
-    void longOverflow() {
-        assertThat(countDigits(1e100)).isEqualTo(101);
+    @DisplayName("Case of counting digits in a Long.MAX_VALUE")
+    void longMaxValue() {
+        assertThat(countDigits(Long.MAX_VALUE)).isEqualTo(19);
     }
 }
