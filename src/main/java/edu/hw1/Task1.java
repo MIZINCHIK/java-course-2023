@@ -25,7 +25,7 @@ public class Task1 {
         long edgeValue = negative ? Long.MIN_VALUE : Long.MAX_VALUE;
         if (seconds > MAX_SECONDS || seconds < MIN_SECONDS
             || (minutes != 0 && (edgeValue / minutes < SECONDS_IN_MINUTE
-            || Math.abs(edgeValue - minutes * 60) < seconds))) {
+            || Math.abs(edgeValue - minutes * SECONDS_IN_MINUTE) < seconds))) {
             return -1;
         }
         seconds = -seconds - Math.abs(minutes) * SECONDS_IN_MINUTE;
