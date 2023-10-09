@@ -1,5 +1,7 @@
 package edu.hw1;
 
+import java.util.Arrays;
+
 public class Task8 {
     private static final int[][] POSSIBLE_TURNS = new int[][] {{2, 1}, {1, 2}, {-1, 2},
         {-2, 1}, {-2, -1}, {-1, -2}, {1, -2}, {2, -1}};
@@ -10,7 +12,8 @@ public class Task8 {
     }
 
     public static boolean knightBoardCapture(int[][] chessBoard) {
-        if (chessBoard.length != BOARD_DIMENSIONS || chessBoard[0].length != BOARD_DIMENSIONS) {
+        if (chessBoard.length != BOARD_DIMENSIONS
+            || Arrays.stream(chessBoard).anyMatch(x -> x.length != BOARD_DIMENSIONS)) {
             throw new IllegalArgumentException("Board is on incorrect size!");
         }
         for (int row = 0; row < BOARD_DIMENSIONS; row++) {
