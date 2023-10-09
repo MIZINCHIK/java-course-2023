@@ -10,17 +10,25 @@ public class Task1 {
     }
 
     public static long minutesToSeconds(String mmSS) {
+        if (!mmSS.matches("-?[0-9]*:[0-9]{2}")) {
+            return -1;
+        }
         String[] separated = mmSS.split(":");
-        if (separated.length != 2 || separated[1].length() != 2) {
-            return -1;
-        }
         long seconds = Long.parseLong(separated[1]);
-        if (seconds > MAX_SECONDS || seconds < MIN_SECONDS) {
+        long minutes;
+        try {
+            minutes = Long.parseLong(separated[0]);
+        } catch (NumberFormatException e) {
             return -1;
         }
-        long minutes = Long.parseLong(separated[0]);
         boolean negative = minutes < 0;
-        seconds += Math.abs(minutes) * SECONDS_IN_MINUTE;
-        return negative ? -seconds : seconds;
+        long edgeValue = negative ? Long.MIN_VALUE : Long.MAX_VALUE;
+        if (seconds > MAX_SECONDS || seconds < MIN_SECONDS
+            || (minutes != 0 && (edgeValue / minutes < SECONDS_IN_MINUTE
+            || Math.abs(edgeValue - minutes * 60) < seconds))) {
+            return -1;
+        }
+        seconds = -seconds - Math.abs(minutes) * SECONDS_IN_MINUTE;
+        return negative ? seconds : -seconds;
     }
 }
