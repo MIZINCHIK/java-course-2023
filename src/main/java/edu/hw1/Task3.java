@@ -8,10 +8,10 @@ public class Task3 {
     }
 
     public static boolean isNestable(int[] nested, int[] nest) {
-        if (nest.length == 0) {
+        if (nest == null || nest.length == 0) {
             return false;
         }
-        if (nested.length == 0) {
+        if (nested == null || nested.length == 0) {
             return true;
         }
         return Arrays.stream(nested).max().getAsInt() < Arrays.stream(nest).max().getAsInt()

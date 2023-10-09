@@ -19,6 +19,18 @@ public class Task3Test {
     }
 
     @Test
+    @DisplayName("Null array is never able to nest another one")
+    void nullNest() {
+        assertThat(isNestable(new int[]{1, 2, 3, 4}, null)).isFalse();
+    }
+
+    @Test
+    @DisplayName("Null is always nestable")
+    void emptyNull() {
+        assertThat(isNestable(null, new int[]{0, 6})).isTrue();
+    }
+
+    @Test
     @DisplayName("First case of a nestable array")
     void nestable1() {
         assertThat(isNestable(new int[]{1, 2, 3, 4}, new int[]{0, 6})).isTrue();
