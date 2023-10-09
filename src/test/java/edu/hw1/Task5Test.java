@@ -8,18 +8,18 @@ public class Task5Test {
     @Test
     @DisplayName("Number that is indeed a special palindrome")
     void numberTrue() {
-        assertThat(Task5.isSpecialPalindrome(11211230)).isTrue();
+        assertThat(Task5.isPalindromeDescendant(11211230)).isTrue();
     }
 
     @Test
     @DisplayName("Number that isn't a special palindrome")
     void numberFalse() {
-        assertThat(Task5.isSpecialPalindrome(12)).isFalse();
+        assertThat(Task5.isPalindromeDescendant(12)).isFalse();
     }
 
     @Test
     @DisplayName("Single-digit number is a special palindrome")
     void numberSingleDigit() {
-        assertThat(Task5.isSpecialPalindrome(1)).isTrue();
+        assertThat(Task5.isPalindromeDescendant(1)).isTrue();
     }
 }

@@ -5,12 +5,12 @@ public class Task5 {
         throw new IllegalStateException();
     }
 
-    public static boolean isSpecialPalindrome(long number) {
+    public static boolean isPalindromeDescendant(long number) {
         String numberAsString = Long.toString(number);
-        return isPalindromeItself(numberAsString) || hasPalindromeDescendant(numberAsString);
+        return isPalindromeItself(numberAsString) || isPalindromeDescendant(numberAsString);
     }
 
-    private static boolean hasPalindromeDescendant(String number) {
+    private static boolean isPalindromeDescendant(String number) {
         int numLen = number.length();
         if (numLen < 2) {
             return false;
@@ -19,7 +19,7 @@ public class Task5 {
         if (numLen % 2 != 0) {
             return itself;
         }
-        return itself || hasPalindromeDescendant(getDescendant(number));
+        return itself || isPalindromeDescendant(getDescendant(number));
     }
 
     private static boolean isPalindromeItself(String number) {
