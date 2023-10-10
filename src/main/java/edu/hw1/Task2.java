@@ -8,9 +8,12 @@ public class Task2 {
     }
 
     public static int countDigits(long number) {
+        if (number == 0) {
+            return 1;
+        }
         long left = number;
-        int result = 1;
-        while (left > BASE) {
+        int result = 0;
+        while (left != 0) {
             result++;
             left /= BASE;
         }
