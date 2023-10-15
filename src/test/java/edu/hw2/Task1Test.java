@@ -87,7 +87,8 @@ public class Task1Test {
         var two = new Constant(2);
         var four = new Constant(4);
         var sum = new Addition(new Addition(2, four), new Addition(two, 4));
-        var mult = new Multiplication(new Multiplication(sum, -1).evaluate(), new Multiplication(1, 1));
+        var mult =
+            new Multiplication(new Multiplication(sum, new Negate(1).evaluate()).evaluate(), new Multiplication(1, 1));
         var exp = new Exponent(mult.evaluate(), two);
         var res = new Addition(exp.evaluate(), 1);
         assertThat(res.evaluate()).isEqualTo(145);
