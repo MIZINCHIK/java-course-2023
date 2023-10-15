@@ -8,6 +8,7 @@ import edu.hw2.Task1.Negate;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import static org.assertj.core.api.AssertionsForClassTypes.assertThat;
+import static org.assertj.core.api.AssertionsForClassTypes.assertThatThrownBy;
 
 public class Task1Test {
     @Test
@@ -92,5 +93,32 @@ public class Task1Test {
         var exp = new Exponent(mult.evaluate(), two);
         var res = new Addition(exp.evaluate(), 1);
         assertThat(res.evaluate()).isEqualTo(145);
+    }
+
+    @Test
+    @DisplayName("Null arguments in Negate constructor are not allowed")
+    void nullArgumentNegate() {
+        assertThatThrownBy(() -> new Negate(null)).isInstanceOf(IllegalArgumentException.class);
+    }
+
+    @Test
+    @DisplayName("Null arguments in Exponent constructor are not allowed")
+    void nullArgumentExponent() {
+        assertThatThrownBy(() -> new Exponent(null, 1)).isInstanceOf(IllegalArgumentException.class);
+        assertThatThrownBy(() -> new Exponent(1, null)).isInstanceOf(IllegalArgumentException.class);
+    }
+
+    @Test
+    @DisplayName("Null arguments in Addition constructor are not allowed")
+    void nullArgumentAddition() {
+        assertThatThrownBy(() -> new Addition(null, 1)).isInstanceOf(IllegalArgumentException.class);
+        assertThatThrownBy(() -> new Addition(1, null)).isInstanceOf(IllegalArgumentException.class);
+    }
+
+    @Test
+    @DisplayName("Null arguments in Multiplication constructor are not allowed")
+    void nullArgumentMultiplication() {
+        assertThatThrownBy(() -> new Multiplication(null, 1)).isInstanceOf(IllegalArgumentException.class);
+        assertThatThrownBy(() -> new Multiplication(1, null)).isInstanceOf(IllegalArgumentException.class);
     }
 }
