@@ -3,6 +3,7 @@ package edu.hw2;
 import edu.hw2.Task1.Addition;
 import edu.hw2.Task1.Constant;
 import edu.hw2.Task1.Exponent;
+import edu.hw2.Task1.Expr;
 import edu.hw2.Task1.Multiplication;
 import edu.hw2.Task1.Negate;
 import org.junit.jupiter.api.DisplayName;
@@ -72,12 +73,12 @@ public class Task1Test {
     @Test
     @DisplayName("Well-rounded expression.")
     void reference() {
-        var two = new Constant(2);
-        var four = new Constant(4);
-        var negOne = new Negate(new Constant(1));
-        var sumTwoFour = new Addition(two, four);
-        var mult = new Multiplication(sumTwoFour, negOne);
-        var exp = new Exponent(mult, 2);
+        Expr two = new Constant(2);
+        Expr four = new Constant(4);
+        Expr negOne = new Negate(new Constant(1));
+        Expr sumTwoFour = new Addition(two, four);
+        Expr mult = new Multiplication(sumTwoFour, negOne);
+        Expr exp = new Exponent(mult, 2);
         var res = new Addition(exp, new Constant(1));
         assertThat(res.evaluate()).isEqualTo(37);
     }
