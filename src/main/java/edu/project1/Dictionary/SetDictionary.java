@@ -1,8 +1,8 @@
 package edu.project1.Dictionary;
 
-import org.jetbrains.annotations.NotNull;
 import java.util.Random;
 import java.util.Set;
+import org.jetbrains.annotations.NotNull;
 
 public class SetDictionary implements Dictionary {
     private final Set<String> dictionary;

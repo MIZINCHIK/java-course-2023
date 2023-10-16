@@ -44,6 +44,7 @@ public class Controller {
     }
 
     private void runGuessCycle() {
+        guessCycle:
         while (true) {
             String userInput = readMessage();
             if (userInputIsSafeWord(userInput)) {
@@ -65,14 +66,14 @@ public class Controller {
             switch (state.result()) {
                 case WIN, DEFEAT -> {
                     printAnswer(model.getCurrentWord());
-                    return;
+                    break guessCycle;
                 }
                 case FAILED, GUESSED -> {
                     printCurrentWordMask(model.getUserWordMask());
                     printMistakesLeft(model.getMistakesLeft());
                 }
                 default -> {
-                    return;
+                    break guessCycle;
                 }
             }
         }
