@@ -17,7 +17,7 @@ public class SetDictionary implements Dictionary {
         if (dictionary.isEmpty()) {
             return null;
         }
-        return dictionary.stream().skip(new Random().nextInt(dictionary.size())).findFirst().orElse(null);
+        return dictionary.stream().skip(random.nextInt(dictionary.size())).findFirst().orElse(null);
     }
 
     @Override
