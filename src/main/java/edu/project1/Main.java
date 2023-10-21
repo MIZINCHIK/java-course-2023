@@ -1,7 +1,7 @@
 package edu.project1;
 
-import edu.project1.Dictionary.Dictionary;
-import edu.project1.Dictionary.SetDictionary;
+import edu.project1.dictionary.Dictionary;
+import edu.project1.dictionary.SetDictionary;
 import java.util.HashSet;
 import java.util.List;
 

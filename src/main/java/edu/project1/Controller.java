@@ -1,23 +1,23 @@
 package edu.project1;
 
-import edu.project1.Dictionary.Dictionary;
-import edu.project1.Model.Model;
-import edu.project1.Model.State;
-import static edu.project1.Util.TerminalReader.readMessage;
-import static edu.project1.Util.TerminalWriter.greet;
-import static edu.project1.Util.TerminalWriter.printAllowedMistakesAmount;
-import static edu.project1.Util.TerminalWriter.printAnswer;
-import static edu.project1.Util.TerminalWriter.printCorrectGuess;
-import static edu.project1.Util.TerminalWriter.printCurrentWordMask;
-import static edu.project1.Util.TerminalWriter.printDefeat;
-import static edu.project1.Util.TerminalWriter.printError;
-import static edu.project1.Util.TerminalWriter.printGiveUp;
-import static edu.project1.Util.TerminalWriter.printMistakesLeft;
-import static edu.project1.Util.TerminalWriter.printNewWordMask;
-import static edu.project1.Util.TerminalWriter.printNoMoreWords;
-import static edu.project1.Util.TerminalWriter.printRules;
-import static edu.project1.Util.TerminalWriter.printWin;
-import static edu.project1.Util.TerminalWriter.printWrongGuess;
+import edu.project1.dictionary.Dictionary;
+import edu.project1.model.Model;
+import edu.project1.model.State;
+import static edu.project1.util.TerminalReader.readMessage;
+import static edu.project1.util.TerminalWriter.greet;
+import static edu.project1.util.TerminalWriter.printAllowedMistakesAmount;
+import static edu.project1.util.TerminalWriter.printAnswer;
+import static edu.project1.util.TerminalWriter.printCorrectGuess;
+import static edu.project1.util.TerminalWriter.printCurrentWordMask;
+import static edu.project1.util.TerminalWriter.printDefeat;
+import static edu.project1.util.TerminalWriter.printError;
+import static edu.project1.util.TerminalWriter.printGiveUp;
+import static edu.project1.util.TerminalWriter.printMistakesLeft;
+import static edu.project1.util.TerminalWriter.printNewWordMask;
+import static edu.project1.util.TerminalWriter.printNoMoreWords;
+import static edu.project1.util.TerminalWriter.printRules;
+import static edu.project1.util.TerminalWriter.printWin;
+import static edu.project1.util.TerminalWriter.printWrongGuess;
 
 public class Controller {
     private final static String SAFE_WORD = "give up";

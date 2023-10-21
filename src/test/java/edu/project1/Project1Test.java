@@ -1,9 +1,9 @@
 package edu.project1;
 
-import edu.project1.Dictionary.Dictionary;
-import edu.project1.Dictionary.SetDictionary;
-import edu.project1.Model.GuessResult;
-import edu.project1.Model.Model;
+import edu.project1.dictionary.Dictionary;
+import edu.project1.dictionary.SetDictionary;
+import edu.project1.model.GuessResult;
+import edu.project1.model.Model;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import java.util.HashSet;

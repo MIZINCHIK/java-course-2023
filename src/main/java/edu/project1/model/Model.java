@@ -1,6 +1,6 @@
-package edu.project1.Model;
+package edu.project1.model;
 
-import edu.project1.Dictionary.Dictionary;
+import edu.project1.dictionary.Dictionary;
 import org.jetbrains.annotations.NotNull;
 
 public class Model {

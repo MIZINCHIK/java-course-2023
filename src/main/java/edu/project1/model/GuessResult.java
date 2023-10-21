@@ -1,4 +1,4 @@
-package edu.project1.Model;
+package edu.project1.model;
 
 public enum GuessResult {
     WIN,

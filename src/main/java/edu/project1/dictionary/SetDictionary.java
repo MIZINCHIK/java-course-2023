@@ -1,4 +1,4 @@
-package edu.project1.Dictionary;
+package edu.project1.dictionary;
 
 import java.util.Random;
 import java.util.Set;

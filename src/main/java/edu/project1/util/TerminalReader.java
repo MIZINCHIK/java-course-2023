@@ -1,4 +1,4 @@
-package edu.project1.Util;
+package edu.project1.util;
 
 import java.util.Scanner;
 

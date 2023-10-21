@@ -1,4 +1,4 @@
-package edu.project1.Dictionary;
+package edu.project1.dictionary;
 
 public interface Dictionary {
     String getWord();
