@@ -9,14 +9,12 @@ import org.apache.logging.log4j.Logger;
 public class DefaultConnectionManager implements ConnectionManager {
     private static final Logger LOGGER = LogManager.getLogger();
     private static final int FAULTY_CONNECTION_TURN = 5;
-    
-    private static int counter = 0;
+
+    private int counter = 0;
 
     @Override
     public Connection getConnection() {
-        boolean faulty = isFaultyConnectionTurn();
-        updateCounter();
-        if (faulty) {
+        if (isFaultyConnectionTurn()) {
             LOGGER.info("Faulty connection established");
             return new FaultyConnection();
         } else {
@@ -25,8 +23,8 @@ public class DefaultConnectionManager implements ConnectionManager {
         }
     }
 
-    private void updateCounter() {
-        if (isFaultyConnectionTurn()) {
+    private void updateCounter(boolean faultyConnectionTurn) {
+        if (faultyConnectionTurn) {
             counter = 0;
         } else {
             counter++;
@@ -34,6 +32,8 @@ public class DefaultConnectionManager implements ConnectionManager {
     }
 
     private boolean isFaultyConnectionTurn() {
-        return counter == FAULTY_CONNECTION_TURN;
+        boolean result = counter == FAULTY_CONNECTION_TURN;
+        updateCounter(result);
+        return result;
     }
 }

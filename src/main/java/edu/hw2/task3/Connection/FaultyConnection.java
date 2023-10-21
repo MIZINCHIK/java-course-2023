@@ -11,9 +11,7 @@ public class FaultyConnection implements Connection {
 
     @Override
     public void execute(String command) {
-        boolean exception = isExceptionTurn();
-        updateCounter();
-        if (exception) {
+        if (isExceptionTurn()) {
             throw new ConnectionException("Execution failed");
         } else {
             LOGGER.info("Command " + command + " executed");
@@ -25,8 +23,8 @@ public class FaultyConnection implements Connection {
         LOGGER.info("Connection closed");
     }
 
-    private void updateCounter() {
-        if (isExceptionTurn()) {
+    private void updateCounter(boolean exceptionTurn) {
+        if (exceptionTurn) {
             counter = 0;
         } else {
             counter++;
@@ -34,6 +32,8 @@ public class FaultyConnection implements Connection {
     }
 
     private boolean isExceptionTurn() {
-        return counter == EXCEPTION_TURN;
+        boolean result = counter == EXCEPTION_TURN;
+        updateCounter(result);
+        return result;
     }
 }
