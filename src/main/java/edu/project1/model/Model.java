@@ -40,10 +40,11 @@ public class Model {
         if (!correctGuess) {
             mistakes++;
         }
-        State result = new State(new String(userWordMask), correctGuess
+        GuessResult guessResult = correctGuess
             ? (lettersLeft ? GuessResult.GUESSED : GuessResult.WIN)
-            : ((getMistakesLeft() > 0) ? GuessResult.FAILED : GuessResult.DEFEAT)
-        );
+            : ((getMistakesLeft() > 0) ? GuessResult.FAILED : GuessResult.DEFEAT);
+        State result = new State(new String(userWordMask),
+            new String(currentWord), getMistakesLeft(), guessResult);
         if (result.result() == GuessResult.WIN) {
             dictionary.removeWord(result.wordMask());
         }
@@ -72,11 +73,7 @@ public class Model {
         return new String(userWordMask);
     }
 
-    public String getCurrentWord() {
-        return new String(currentWord);
-    }
-
-    public int getMistakesLeft() {
+    private int getMistakesLeft() {
         return maxMistakes - mistakes;
     }
 }
