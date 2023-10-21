@@ -17,9 +17,8 @@ public final class PopularCommandExecutor {
     }
 
     public void tryExecute(String command) {
-        var connection = manager.getConnection();
         for (int i = 0; i < maxAttempts; i++) {
-            try (connection) {
+            try (var connection = manager.getConnection();) {
                 connection.execute(command);
                 return;
             } catch (ConnectionException e) {
