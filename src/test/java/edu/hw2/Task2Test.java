@@ -15,11 +15,27 @@ public class Task2Test {
     }
 
     @Test
-    @DisplayName("LSP holds")
-    void LSP() {
+    @DisplayName("LSP holds for area calculations")
+    void lspHoldsArea() {
         Rectangle squareAsRectangle = new Square(4);
         Square squareAsSquare = new Square(4);
         assertThat(squareAsRectangle.area()).isEqualTo(squareAsSquare.area());
+    }
+
+    @Test
+    @DisplayName("LSP holds for height setting")
+    void lspHoldsSetHeight() {
+        Rectangle squareAsRectangle = new Square(4);
+        Square squareAsSquare = new Square(4);
+        assertThat(squareAsRectangle.setHeight(5).getWidth()).isEqualTo(squareAsSquare.setHeight(5).getWidth());
+    }
+
+    @Test
+    @DisplayName("LSP holds for width setting")
+    void lspHoldsSetWidth() {
+        Rectangle squareAsRectangle = new Square(4);
+        Square squareAsSquare = new Square(4);
+        assertThat(squareAsRectangle.setWidth(5).getHeight()).isEqualTo(squareAsSquare.setWidth(5).getHeight());
     }
 
     @Test
