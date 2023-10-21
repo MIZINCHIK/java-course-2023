@@ -8,8 +8,9 @@ import org.apache.logging.log4j.Logger;
 
 public class DefaultConnectionManager implements ConnectionManager {
     private static final Logger LOGGER = LogManager.getLogger();
+    private static final int FAULTY_CONNECTION_TURN = 5;
+    
     private static int counter = 0;
-    private final static int FAULTY_CONNECTION_TURN = 5;
 
     @Override
     public Connection getConnection() {
