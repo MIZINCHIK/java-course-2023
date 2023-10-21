@@ -1,7 +1,7 @@
 package edu.hw2;
 
-import edu.hw2.task3.Connection.ConnectionException;
-import edu.hw2.task3.ConnectionManagement.FaultyConnectionManager;
+import edu.hw2.task3.connection.ConnectionException;
+import edu.hw2.task3.connectionmanagement.FaultyConnectionManager;
 import edu.hw2.task3.PopularCommandExecutor;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;

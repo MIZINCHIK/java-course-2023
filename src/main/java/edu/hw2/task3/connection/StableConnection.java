@@ -1,4 +1,4 @@
-package edu.hw2.task3.Connection;
+package edu.hw2.task3.connection;
 
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
