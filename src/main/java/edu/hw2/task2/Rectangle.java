@@ -1,4 +1,4 @@
-package edu.hw2.Task2;
+package edu.hw2.task2;
 
 public class Rectangle {
     private final int width;

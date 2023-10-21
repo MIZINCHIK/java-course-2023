@@ -1,7 +1,7 @@
-package edu.hw2.Task3;
+package edu.hw2.task3;
 
-import edu.hw2.Task3.Connection.ConnectionException;
-import edu.hw2.Task3.ConnectionManagement.ConnectionManager;
+import edu.hw2.task3.Connection.ConnectionException;
+import edu.hw2.task3.ConnectionManagement.ConnectionManager;
 
 public final class PopularCommandExecutor {
     private final ConnectionManager manager;

@@ -1,7 +1,7 @@
-package edu.hw2.Task3.ConnectionManagement;
+package edu.hw2.task3.ConnectionManagement;
 
-import edu.hw2.Task3.Connection.Connection;
-import edu.hw2.Task3.Connection.FaultyConnection;
+import edu.hw2.task3.Connection.Connection;
+import edu.hw2.task3.Connection.FaultyConnection;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 
