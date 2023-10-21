@@ -99,6 +99,7 @@ public class TerminalWriter implements HangmanView {
                 showCurrentWordMask(result.wordMask());
                 showMistakesLeft(result.maxMistakesLeft());
             }
+            default -> showError();
         }
     }
 }
