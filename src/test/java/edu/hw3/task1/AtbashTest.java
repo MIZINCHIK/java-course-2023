@@ -19,7 +19,7 @@ public class AtbashTest {
 
     @Test
     @DisplayName("Encode a non-empty string")
-    void encodeAtbash_nonEmptyString() {
+    void encodeAtbash_nonEmptyString_mirrorCharacters() {
         String targetString = "AAaazzZZHel";
         String correctAnswer = "ZZzzaaAASvo";
         Mockito.when(alphabet.mirrorSymbol('A')).thenReturn(Integer.valueOf('Z'));
@@ -35,7 +35,7 @@ public class AtbashTest {
 
     @Test
     @DisplayName("Encode an empty String")
-    void encodeAtbash_emptyString() {
+    void encodeAtbash_emptyString_unchanged() {
         String targetString = "";
         String correctAnswer = "";
         assertThat(atbash.encodeAtbash(targetString)).isEqualTo(correctAnswer);

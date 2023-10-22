@@ -9,61 +9,61 @@ public class LatinTest {
 
     @Test
     @DisplayName("inAlphabet returns false for characters not in the Latin alphabet")
-    void inAlphabet_false() {
+    void inAlphabet_nonLatinCharacter_false() {
         assertThat(latin.inAlphabet('1')).isFalse();
     }
 
     @Test
     @DisplayName("inAlphabet returns true for lowercase characters in the Latin alphabet")
-    void inAlphabet_trueLowerCase() {
+    void inAlphabet_latinCharacterLowerCase_true() {
         assertThat(latin.inAlphabet('a')).isTrue();
     }
 
     @Test
     @DisplayName("inAlphabet returns true for uppercase characters in the Latin alphabet")
-    void inAlphabet_trueUpperCase() {
+    void inAlphabet_latinCharacterUpperCase_true() {
         assertThat(latin.inAlphabet('A')).isTrue();
     }
 
     @Test
     @DisplayName("Mirroring uppercase beginning of the alphabet")
-    void mirrorSymbol_inAlphabetUpperCaseLeftBorder() {
+    void mirrorSymbol_inAlphabetUpperCaseLeftBorder_mirrored() {
         assertThat(latin.mirrorSymbol('A')).isEqualTo('Z');
     }
 
     @Test
     @DisplayName("Mirroring lowercase beginning of the alphabet")
-    void mirrorSymbol_inAlphabetLowerCaseLeftBorder() {
+    void mirrorSymbol_inAlphabetLowerCaseLeftBorder_mirrored() {
         assertThat(latin.mirrorSymbol('a')).isEqualTo('z');
     }
 
     @Test
     @DisplayName("Mirroring uppercase ending of the alphabet")
-    void mirrorSymbol_inAlphabetUpperCaseRightBorder() {
+    void mirrorSymbol_inAlphabetUpperCaseRightBorder_mirrored() {
         assertThat(latin.mirrorSymbol('Z')).isEqualTo('A');
     }
 
     @Test
     @DisplayName("Mirroring lowercase ending of the alphabet")
-    void mirrorSymbol_inAlphabetLowerCaseRightBorder() {
+    void mirrorSymbol_inAlphabetLowerCaseRightBorder_mirrored() {
         assertThat(latin.mirrorSymbol('z')).isEqualTo('a');
     }
 
     @Test
     @DisplayName("Mirroring uppercase inside character of the alphabet")
-    void mirrorSymbol_inAlphabetUpperCaseInside() {
+    void mirrorSymbol_inAlphabetUpperCaseInside_mirrored() {
         assertThat(latin.mirrorSymbol('N')).isEqualTo('M');
     }
 
     @Test
     @DisplayName("Mirroring lowercase inside character of the alphabet")
-    void mirrorSymbol_inAlphabetLowerCaseInside() {
+    void mirrorSymbol_inAlphabetLowerCaseInside_mirrored() {
         assertThat(latin.mirrorSymbol('m')).isEqualTo('n');
     }
 
     @Test
     @DisplayName("Mirroring characters not in the alphabet")
-    void mirrorSymbol_notInAlphabet() {
+    void mirrorSymbol_notInAlphabet_unchanged() {
         assertThat(latin.mirrorSymbol('1')).isEqualTo('1');
     }
 }
