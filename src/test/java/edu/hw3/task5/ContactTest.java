@@ -48,4 +48,17 @@ public class ContactTest {
             new Contact("Химчистка", "Центр")};
         assertIterableEquals(Arrays.asList(expected), Arrays.asList(contacts));
     }
+
+    @Test
+    @DisplayName("Test descending sorting order")
+    void parseContacts_descendingOrder_correctlySortedArray() {
+        Contact[] contacts = parseContacts(new String[]{"John"
+            ,"Химчистка Центр", "Thomas Aquinas", "David Hume", "Rene"}, ContactSortingOrder.DESC);
+        Contact[] expected = new Contact[]{new Contact("Химчистка", "Центр"),
+            new Contact("Rene", null),
+            new Contact("John", null),
+            new Contact("David", "Hume"),
+            new Contact("Thomas", "Aquinas")};
+        assertIterableEquals(Arrays.asList(expected), Arrays.asList(contacts));
+    }
 }
