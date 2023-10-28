@@ -21,7 +21,9 @@ public class ClusterizerTest {
     @DisplayName("Clusterizing a String of incorrect format produces a null")
     void clusterize_incorrectCharacters_IllegalArgumentException() {
         String targetString = "(1)()()";
-        assertThatThrownBy(() -> clusterize(targetString)).isInstanceOf(IllegalArgumentException.class);
+        assertThatThrownBy(() -> clusterize(targetString))
+            .isInstanceOf(NullPointerException.class)
+            .message().isEqualTo("No string of braces provided!");
     }
 
     @Test
