@@ -1,13 +1,13 @@
 package edu.hw2.task3.connection;
 
+import java.util.Random;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 
 public class FaultyConnection implements Connection {
     private static final Logger LOGGER = LogManager.getLogger();
-    private static final int EXCEPTION_TURN = 5;
 
-    private static int counter = 0;
+    private final Random random = new Random();
 
     @Override
     public void execute(String command) {
@@ -23,17 +23,7 @@ public class FaultyConnection implements Connection {
         LOGGER.info("Connection closed");
     }
 
-    private void updateCounter(boolean exceptionTurn) {
-        if (exceptionTurn) {
-            counter = 0;
-        } else {
-            counter++;
-        }
-    }
-
     private boolean isExceptionTurn() {
-        boolean result = counter == EXCEPTION_TURN;
-        updateCounter(result);
-        return result;
+        return random.nextBoolean();
     }
 }

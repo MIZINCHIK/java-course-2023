@@ -3,14 +3,14 @@ package edu.hw2.task3.connectionmanagement;
 import edu.hw2.task3.connection.Connection;
 import edu.hw2.task3.connection.FaultyConnection;
 import edu.hw2.task3.connection.StableConnection;
+import java.util.Random;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 
 public class DefaultConnectionManager implements ConnectionManager {
     private static final Logger LOGGER = LogManager.getLogger();
-    private static final int FAULTY_CONNECTION_TURN = 5;
 
-    private int counter = 0;
+    private final Random random = new Random();
 
     @Override
     public Connection getConnection() {
@@ -23,17 +23,7 @@ public class DefaultConnectionManager implements ConnectionManager {
         }
     }
 
-    private void updateCounter(boolean faultyConnectionTurn) {
-        if (faultyConnectionTurn) {
-            counter = 0;
-        } else {
-            counter++;
-        }
-    }
-
     private boolean isFaultyConnectionTurn() {
-        boolean result = counter == FAULTY_CONNECTION_TURN;
-        updateCounter(result);
-        return result;
+        return random.nextBoolean();
     }
 }
