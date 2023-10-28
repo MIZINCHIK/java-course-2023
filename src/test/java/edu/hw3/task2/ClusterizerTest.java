@@ -6,6 +6,7 @@ import java.util.List;
 import java.util.Objects;
 import static edu.hw3.task2.Clusterizer.clusterize;
 import static org.assertj.core.api.AssertionsForClassTypes.assertThat;
+import static org.assertj.core.api.AssertionsForClassTypes.assertThatThrownBy;
 import static org.junit.jupiter.api.Assertions.assertIterableEquals;
 
 public class ClusterizerTest {
@@ -18,9 +19,9 @@ public class ClusterizerTest {
 
     @Test
     @DisplayName("Clusterizing a String of incorrect format produces a null")
-    void clusterize_incorrectCharacters_null() {
+    void clusterize_incorrectCharacters_IllegalArgumentException() {
         String targetString = "(1)()()";
-        assertThat(clusterize(targetString)).isNull();
+        assertThatThrownBy(() -> clusterize(targetString)).isInstanceOf(IllegalArgumentException.class);
     }
 
     @Test

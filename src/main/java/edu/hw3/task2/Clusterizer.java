@@ -12,7 +12,7 @@ public class Clusterizer {
 
     public static List<String> clusterize(String braces) {
         if (!isCorrectInput(braces)) {
-            return null;
+            throw new IllegalArgumentException();
         }
         List<String> result = new ArrayList<>();
         int stack = 0;
