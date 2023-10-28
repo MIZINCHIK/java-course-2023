@@ -10,7 +10,10 @@ public class Atbash {
     }
 
     public String encodeAtbash(String input) {
-        return input.codePoints().map(alphabet::mirrorSymbol).collect(StringBuilder::new,
+        return input
+            .codePoints()
+            .map(alphabet::mirrorSymbol)
+            .collect(StringBuilder::new,
                 StringBuilder::appendCodePoint, StringBuilder::append).toString();
     }
 }
