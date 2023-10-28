@@ -1,18 +1,23 @@
 package edu.hw3.task5;
 
-import org.jetbrains.annotations.NotNull;
 import java.util.Arrays;
 import java.util.Comparator;
 import java.util.Objects;
+import org.jetbrains.annotations.NotNull;
 
 public record Contact(String firstName, String lastName) implements Comparable<Contact> {
     public static Contact[] parseContacts(String[] contacts, ContactSortingOrder order) {
-        return Arrays.stream(contacts).filter(Objects::nonNull).map(contact -> {
-            String[] names = contact.split(" ", 2);
-            return new Contact(names[0], names.length >= 2 ? names[1] : null);
-        }).sorted(order == ContactSortingOrder.DESC
+        return Arrays
+            .stream(contacts)
+            .filter(Objects::nonNull)
+            .map(Contact::createContact).sorted(order == ContactSortingOrder.DESC
             ? Comparator.reverseOrder()
             : Comparator.naturalOrder()).toArray(Contact[]::new);
+    }
+
+    public static Contact createContact(String name) {
+        String[] names = name.split(" ", 2);
+        return new Contact(names[0], names.length >= 2 ? names[1] : null);
     }
 
     @Override
