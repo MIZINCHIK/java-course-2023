@@ -22,6 +22,7 @@ import static edu.hw4.AnimalUtil.getLongestNameAnimal;
 import static edu.hw4.AnimalUtil.getMostAnimalsSex;
 import static edu.hw4.AnimalUtil.isInListDogHigherKcm;
 import static edu.hw4.AnimalUtil.sortHeightAscending;
+import static edu.hw4.AnimalUtil.sumWeightAnimalsKtoLYearsOldInclusive;
 import static org.assertj.core.api.AssertionsForClassTypes.assertThat;
 import static org.junit.jupiter.api.Assertions.assertIterableEquals;
 
@@ -311,5 +312,19 @@ public class AnimalUtilTest {
     @DisplayName("Animals with names longer than 1 word in a list")
     void isInListDogHigherKcm_nonEmptyList_false() {
         assertThat(isInListDogHigherKcm(unorderedList, Integer.MAX_VALUE)).isFalse();
+    }
+
+    @Test
+    @DisplayName("Total weight of animals from k to l y.o. in empty list is 0")
+    void sumWeightAnimalsKtoLYearsOldInclusive_emptyList_zero() {
+        assertThat(sumWeightAnimalsKtoLYearsOldInclusive(
+            new ArrayList<>(), Integer.MIN_VALUE, Integer.MAX_VALUE)).isEqualTo(0);
+    }
+
+    @Test
+    @DisplayName("Total weight of animals from k to l y.o. in a non-empty list")
+    void sumWeightAnimalsKtoLYearsOldInclusive_nonEmptyList_totalSum() {
+        assertThat(sumWeightAnimalsKtoLYearsOldInclusive(
+            unorderedList, 10, 20)).isEqualTo(10074);
     }
 }

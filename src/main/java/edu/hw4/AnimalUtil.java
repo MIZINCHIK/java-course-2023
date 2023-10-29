@@ -106,4 +106,11 @@ public class AnimalUtil {
         return animals.stream()
             .anyMatch(x -> x.type() == Type.DOG && x.height() > k);
     }
+
+    public static Integer sumWeightAnimalsKtoLYearsOldInclusive(List<Animal> animals, int k, int l) {
+        return animals.stream()
+            .filter(x -> x.age() >= k && x.age() <= l)
+            .map(Animal::weight)
+            .reduce(0, Integer::sum);
+    }
 }
