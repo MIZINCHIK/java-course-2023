@@ -76,4 +76,10 @@ public class AnimalUtil {
             .map(Animal::paws)
             .reduce(0, Integer::sum);
     }
+
+    public static List<Animal> getAnimalsAgeNotEqualPaws(List<Animal> animals) {
+        return animals.stream()
+            .filter(x -> x.age() != x.paws())
+            .collect(Collectors.toList());
+    }
 }

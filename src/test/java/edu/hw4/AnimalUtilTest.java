@@ -9,6 +9,7 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Optional;
 import static edu.hw4.AnimalUtil.countPaws;
+import static edu.hw4.AnimalUtil.getAnimalsAgeNotEqualPaws;
 import static edu.hw4.AnimalUtil.getEachTypeAmount;
 import static edu.hw4.AnimalUtil.getEachTypeHeaviestAnimal;
 import static edu.hw4.AnimalUtil.getHeaviestAnimalUnderKcmHeight;
@@ -231,5 +232,20 @@ public class AnimalUtilTest {
     @DisplayName("Number of Paws in a non-empty list")
     void countPaws_nonEmptyList_totalAmount() {
         assertThat(countPaws(unorderedList)).isEqualTo(40);
+    }
+
+    @Test
+    @DisplayName("Given an empty list getAnimalsAgeNotEqualPaws produces an empty list")
+    void getAnimalsAgeNotEqualPaws_emptyList_emptyList() {
+        assertThat(getAnimalsAgeNotEqualPaws(new ArrayList<>())).isEqualTo(new ArrayList<>());
+    }
+
+    @Test
+    @DisplayName("Given a list in which there are such animals getAnimalsAgeNotEqualPaws produces a list without them")
+    void getAnimalsAgeNotEqualPaws_nonEmptyList_listOfEligibleAnimals() {
+        var expected = new ArrayList<>(unorderedList);
+        expected.remove(sobaka);
+        expected.remove(raven);
+        assertThat(getAnimalsAgeNotEqualPaws(unorderedList)).isEqualTo(expected);
     }
 }
