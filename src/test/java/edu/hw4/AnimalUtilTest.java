@@ -12,6 +12,7 @@ import static edu.hw4.AnimalUtil.countAnimalWeightOverHeight;
 import static edu.hw4.AnimalUtil.countPaws;
 import static edu.hw4.AnimalUtil.getAnimalsAgeNotEqualPaws;
 import static edu.hw4.AnimalUtil.getAnimalsCanBiteHigher100cm;
+import static edu.hw4.AnimalUtil.getAnimalsNameSeveralWords;
 import static edu.hw4.AnimalUtil.getEachTypeAmount;
 import static edu.hw4.AnimalUtil.getEachTypeHeaviestAnimal;
 import static edu.hw4.AnimalUtil.getHeaviestAnimalUnderKcmHeight;
@@ -274,5 +275,22 @@ public class AnimalUtilTest {
     @DisplayName("Number of animals with weight higher than height in a non-empty list")
     void countAnimalWeightOverHeight_nonEmptyList_amount() {
         assertThat(countAnimalWeightOverHeight(unorderedList)).isEqualTo(2);
+    }
+
+    @Test
+    @DisplayName("No animals with names of length > 1 word in empty list")
+    void getAnimalsNameSeveralWords_emptyList_emptyList() {
+        assertThat(getAnimalsNameSeveralWords(new ArrayList<>())).isEqualTo(new ArrayList<>());
+    }
+
+    @Test
+    @DisplayName("Animals with names longer than 1 word in a list")
+    void getAnimalsNameSeveralWords_nonEmptyList_listOfEligibleAnimals() {
+        var expected = new ArrayList<Animal>();
+        expected.add(milesMorales);
+        expected.add(baldEagle);
+        expected.add(nyanCat);
+        expected.add(grumpyCat);
+        assertThat(getAnimalsNameSeveralWords(unorderedList)).isEqualTo(expected);
     }
 }
