@@ -24,12 +24,17 @@ public class AnimalUtil {
             .collect(Collectors.toList());
     }
 
-    public static Map<Type, Integer> eachTypeAmount(List<Animal> animals) {
+    public static Map<Type, Integer> getEachTypeAmount(List<Animal> animals) {
         Map<Type, Integer> result = animals.stream()
             .collect(Collectors.groupingBy(Animal::type,
                 Collectors.summingInt(x -> 1)));
         EnumSet.allOf(Type.class)
             .forEach(key -> result.computeIfAbsent(key, x -> 0));
         return result;
+    }
+
+    public static Animal getLongestNameAnimal(List<Animal> animals) {
+        return animals.stream()
+            .max(Comparator.comparingInt(x -> x.name().length())).orElse(null);
     }
 }

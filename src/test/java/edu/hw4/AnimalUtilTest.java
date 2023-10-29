@@ -7,11 +7,11 @@ import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.HashMap;
 import java.util.List;
-import static edu.hw4.AnimalUtil.eachTypeAmount;
+import static edu.hw4.AnimalUtil.getEachTypeAmount;
 import static edu.hw4.AnimalUtil.getKTopWeighing;
+import static edu.hw4.AnimalUtil.getLongestNameAnimal;
 import static edu.hw4.AnimalUtil.sortHeightAscending;
 import static org.assertj.core.api.AssertionsForClassTypes.assertThat;
-import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertIterableEquals;
 
 public class AnimalUtilTest {
@@ -99,25 +99,37 @@ public class AnimalUtilTest {
 
     @Test
     @DisplayName("Each type amount on an empty list return zero for each")
-    void eachTypeAmount_emptyList_eachType0() {
+    void getEachTypeAmount_emptyList_eachType0() {
         var expected = new HashMap<Type, Integer>();
         expected.put(Type.BIRD, 0);
         expected.put(Type.DOG, 0);
         expected.put(Type.FISH, 0);
         expected.put(Type.CAT, 0);
         expected.put(Type.SPIDER, 0);
-        assertThat(eachTypeAmount(new ArrayList<>())).isEqualTo(expected);
+        assertThat(getEachTypeAmount(new ArrayList<>())).isEqualTo(expected);
     }
 
     @Test
     @DisplayName("Each type amount on list count the amount correctly")
-    void eachTypeAmount_nonEmptyList_amountsForEach() {
+    void getEachTypeAmount_nonEmptyList_amountsForEach() {
         var expected = new HashMap<Type, Integer>();
         expected.put(Type.BIRD, 2);
         expected.put(Type.DOG, 3);
         expected.put(Type.FISH, 2);
         expected.put(Type.CAT, 2);
         expected.put(Type.SPIDER, 2);
-        assertThat(eachTypeAmount(unorderedList)).isEqualTo(expected);
+        assertThat(getEachTypeAmount(unorderedList)).isEqualTo(expected);
+    }
+
+    @Test
+    @DisplayName("Animal with the longest name in an empty List is null")
+    void getLongestNameAnimal_emptyList_null() {
+        assertThat(getLongestNameAnimal(new ArrayList<>())).isEqualTo(null);
+    }
+
+    @Test
+    @DisplayName("Animal with the longest name in an unordered list")
+    void getLongestNameAnimal_nonEmptyList_animalWithLongestName() {
+        assertThat(getLongestNameAnimal(unorderedList)).isEqualTo(milesMorales);
     }
 }
