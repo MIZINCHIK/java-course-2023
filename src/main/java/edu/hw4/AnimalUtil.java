@@ -37,4 +37,14 @@ public class AnimalUtil {
         return animals.stream()
             .max(Comparator.comparingInt(x -> x.name().length())).orElse(null);
     }
+
+    public static Sex getMostAnimalsSex(List<Animal> animals) {
+        return animals.stream()
+            .collect(Collectors.groupingBy(Animal::sex, Collectors.counting()))
+            .entrySet()
+            .stream()
+            .max(Comparator.comparingLong(Map.Entry::getValue))
+            .map(Map.Entry::getKey)
+            .orElse(null);
+    }
 }

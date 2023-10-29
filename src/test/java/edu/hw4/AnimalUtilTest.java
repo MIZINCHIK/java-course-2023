@@ -10,6 +10,7 @@ import java.util.List;
 import static edu.hw4.AnimalUtil.getEachTypeAmount;
 import static edu.hw4.AnimalUtil.getKTopWeighing;
 import static edu.hw4.AnimalUtil.getLongestNameAnimal;
+import static edu.hw4.AnimalUtil.getMostAnimalsSex;
 import static edu.hw4.AnimalUtil.sortHeightAscending;
 import static org.assertj.core.api.AssertionsForClassTypes.assertThat;
 import static org.junit.jupiter.api.Assertions.assertIterableEquals;
@@ -131,5 +132,28 @@ public class AnimalUtilTest {
     @DisplayName("Animal with the longest name in an unordered list")
     void getLongestNameAnimal_nonEmptyList_animalWithLongestName() {
         assertThat(getLongestNameAnimal(unorderedList)).isEqualTo(milesMorales);
+    }
+
+    @Test
+    @DisplayName("Sex with the most amount of animals in an empty List is null")
+    void getMostAnimalsSex_emptyList_null() {
+        assertThat(getMostAnimalsSex(new ArrayList<>())).isEqualTo(null);
+    }
+
+    @Test
+    @DisplayName("Sex with the most amount of animals in a list is Male")
+    void getMostAnimalsSex_nonEmptyList_male() {
+        assertThat(getMostAnimalsSex(unorderedList)).isEqualTo(Sex.M);
+    }
+
+    @Test
+    @DisplayName("Sex with the most amount of animals in a list as Female")
+    void getMostAnimalsSex_nonEmptyList_female() {
+        unorderedList = new ArrayList<>();
+        unorderedList.add(pug);
+        unorderedList.add(salmon);
+        unorderedList.add(raven);
+        unorderedList.add(marginal);
+        assertThat(getMostAnimalsSex(unorderedList)).isEqualTo(Sex.F);
     }
 }
