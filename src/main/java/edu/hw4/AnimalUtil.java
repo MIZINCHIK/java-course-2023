@@ -101,4 +101,9 @@ public class AnimalUtil {
             .filter(x -> x.name().split(" ").length > 1)
             .collect(Collectors.toList());
     }
+
+    public static Boolean isInListDogHigherKcm(List<Animal> animals, int k) {
+        return animals.stream()
+            .anyMatch(x -> x.type() == Type.DOG && x.height() > k);
+    }
 }
