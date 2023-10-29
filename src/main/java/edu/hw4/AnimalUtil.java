@@ -4,6 +4,7 @@ import java.util.Comparator;
 import java.util.EnumSet;
 import java.util.List;
 import java.util.Map;
+import java.util.Optional;
 import java.util.function.BinaryOperator;
 import java.util.stream.Collectors;
 
@@ -63,5 +64,11 @@ public class AnimalUtil {
             .skip(k - 1)
             .findFirst()
             .orElse(null);
+    }
+
+    public static Optional<Animal> getHeaviestAnimalUnderKcmHeight(List<Animal> animals, int k) {
+        return animals.stream()
+            .filter(x -> x.height() < k)
+            .max(Comparator.comparingInt(Animal::weight));
     }
 }

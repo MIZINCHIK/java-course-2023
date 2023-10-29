@@ -7,8 +7,10 @@ import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.HashMap;
 import java.util.List;
+import java.util.Optional;
 import static edu.hw4.AnimalUtil.getEachTypeAmount;
 import static edu.hw4.AnimalUtil.getEachTypeHeaviestAnimal;
+import static edu.hw4.AnimalUtil.getHeaviestAnimalUnderKcmHeight;
 import static edu.hw4.AnimalUtil.getKTopWeighing;
 import static edu.hw4.AnimalUtil.getKthOldestAnimal;
 import static edu.hw4.AnimalUtil.getLongestNameAnimal;
@@ -72,8 +74,8 @@ public class AnimalUtilTest {
     @DisplayName("Sorting works in ascending order by height")
     void sortHeightAscending_nonEmptyList_sortedList() {
         var real = sortHeightAscending(unorderedList);
-        var expected = Arrays.asList(new Animal[]{raven, tuna, salmon
-            , pug, grumpyCat, perro, sobaka, baldEagle, milesMorales, marginal, nyanCat});
+        var expected = Arrays.asList(raven, tuna, salmon
+                , pug, grumpyCat, perro, sobaka, baldEagle, milesMorales, marginal, nyanCat);
         assertIterableEquals(expected, real);
     }
 
@@ -197,5 +199,24 @@ public class AnimalUtilTest {
     @DisplayName("K-th oldest animal in list of size less than k is null")
     void getKthOldestAnimal_indexInside_kthOldestAnimal() {
         assertThat(getKthOldestAnimal(unorderedList, 3)).isEqualTo(nyanCat);
+    }
+
+    @Test
+    @DisplayName("Heaviest animal under k cm of height in empty list is empty")
+    void getHeaviestAnimalUnderKcmHeight_emptyList_empty() {
+        assertThat(getHeaviestAnimalUnderKcmHeight(new ArrayList<>(), Integer.MAX_VALUE)).isEmpty();
+    }
+
+    @Test
+    @DisplayName("Heaviest animal under k cm of height in a list with no such animals is empty")
+    void getHeaviestAnimalUnderKcmHeight_noSuchAnimal_empty() {
+        assertThat(getHeaviestAnimalUnderKcmHeight(unorderedList, Integer.MIN_VALUE)).isEmpty();
+    }
+
+    @Test
+    @DisplayName("Heaviest animal under k cm of height in a list is present")
+    void getHeaviestAnimalUnderKcmHeight_suchAnimalsPresent_heaviestOfTheEligible() {
+        assertThat(getHeaviestAnimalUnderKcmHeight(unorderedList, 70))
+            .isEqualTo(Optional.of(perro));
     }
 }
