@@ -4,6 +4,7 @@ import java.util.Comparator;
 import java.util.EnumSet;
 import java.util.List;
 import java.util.Map;
+import java.util.function.BinaryOperator;
 import java.util.stream.Collectors;
 
 public class AnimalUtil {
@@ -46,5 +47,12 @@ public class AnimalUtil {
             .max(Comparator.comparingLong(Map.Entry::getValue))
             .map(Map.Entry::getKey)
             .orElse(null);
+    }
+
+    public static Map<Type, Animal> getEachTypeHeaviestAnimal(List<Animal> animals) {
+        Map<Type, Animal> result = animals.stream()
+            .collect(Collectors.toMap(Animal::type, x -> x,
+                BinaryOperator.maxBy(Comparator.comparing(Animal::weight))));
+        return result;
     }
 }

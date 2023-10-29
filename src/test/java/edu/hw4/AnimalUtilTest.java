@@ -8,6 +8,7 @@ import java.util.Arrays;
 import java.util.HashMap;
 import java.util.List;
 import static edu.hw4.AnimalUtil.getEachTypeAmount;
+import static edu.hw4.AnimalUtil.getEachTypeHeaviestAnimal;
 import static edu.hw4.AnimalUtil.getKTopWeighing;
 import static edu.hw4.AnimalUtil.getLongestNameAnimal;
 import static edu.hw4.AnimalUtil.getMostAnimalsSex;
@@ -19,7 +20,6 @@ public class AnimalUtilTest {
     Animal marginal, milesMorales, perro, sobaka, pug, salmon, tuna
         , raven, baldEagle, nyanCat, grumpyCat;
     List<Animal> unorderedList;
-    List<Animal> expected;
 
     @BeforeEach
     void createAnimals() {
@@ -47,7 +47,6 @@ public class AnimalUtilTest {
             , Sex.M, 7, 50, 7, true);
 
         unorderedList = new ArrayList<>();
-        expected = new ArrayList<>();
 
         unorderedList.add(marginal);
         unorderedList.add(milesMorales);
@@ -72,7 +71,7 @@ public class AnimalUtilTest {
     @DisplayName("Sorting works in ascending order by height")
     void sortHeightAscending_nonEmptyList_sortedList() {
         var real = sortHeightAscending(unorderedList);
-        expected = Arrays.asList(new Animal[]{raven, tuna, salmon
+        var expected = Arrays.asList(new Animal[]{raven, tuna, salmon
             , pug, grumpyCat, perro, sobaka, baldEagle, milesMorales, marginal, nyanCat});
         assertIterableEquals(expected, real);
     }
@@ -86,7 +85,7 @@ public class AnimalUtilTest {
     @Test
     @DisplayName("Getting k when k is within size works fine")
     void getKTopWeighing_limitWithingSize_kElements() {
-        expected = Arrays.asList(nyanCat, perro, marginal);
+        var expected = Arrays.asList(nyanCat, perro, marginal);
         assertIterableEquals(expected, getKTopWeighing(unorderedList, 3));
     }
 
@@ -94,7 +93,7 @@ public class AnimalUtilTest {
     @DisplayName("Getting k when k is over the size returns the whole list")
     void getKTopWeighing_limitOverSize_wholeSortedList() {
         unorderedList = Arrays.asList(tuna, raven, baldEagle);
-        expected = Arrays.asList(baldEagle, tuna, raven);
+        var expected = Arrays.asList(baldEagle, tuna, raven);
         assertIterableEquals(expected, getKTopWeighing(unorderedList, 100));
     }
 
@@ -155,5 +154,23 @@ public class AnimalUtilTest {
         unorderedList.add(raven);
         unorderedList.add(marginal);
         assertThat(getMostAnimalsSex(unorderedList)).isEqualTo(Sex.F);
+    }
+
+    @Test
+    @DisplayName("Heaviest animals in each type for an empty list are all nulls")
+    void getEachTypeHeaviestAnimal_emptyList_emptyMap() {
+        assertThat(getEachTypeHeaviestAnimal(new ArrayList<>())).isEqualTo(new HashMap<>());
+    }
+
+    @Test
+    @DisplayName("Heaviest animals in each type for an unordered list")
+    void getEachTypeHeaviestAnimal_nonEmptyList_heaviestAnimals() {
+        var expected = new HashMap<Type, Animal>();
+        expected.put(Type.BIRD, baldEagle);
+        expected.put(Type.FISH, salmon);
+        expected.put(Type.DOG, perro);
+        expected.put(Type.SPIDER, marginal);
+        expected.put(Type.CAT, nyanCat);
+        assertThat(getEachTypeHeaviestAnimal(unorderedList)).isEqualTo(expected);
     }
 }
