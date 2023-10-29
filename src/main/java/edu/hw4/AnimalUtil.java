@@ -154,6 +154,7 @@ public class AnimalUtil {
         getValidationErrors(animals).forEach(
             (key, value) -> result.put(key, value.stream()
                         .map(ValidationError::getField)
+                        .sorted()
                         .collect(Collectors.joining(", "))));
         return result;
     }

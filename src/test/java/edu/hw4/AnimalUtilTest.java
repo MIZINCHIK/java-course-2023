@@ -463,7 +463,7 @@ public class AnimalUtilTest {
         expected.put("4", "age");
         expected.put("5", "height");
         expected.put("6", "weight");
-        expected.put("7", "weight, age, sex");
+        expected.put("7", "age, sex, weight");
         assertThat(getValidationErrorsPretty(animals)).isEqualTo(expected);
     }
 }
