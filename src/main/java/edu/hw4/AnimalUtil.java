@@ -82,4 +82,11 @@ public class AnimalUtil {
             .filter(x -> x.age() != x.paws())
             .collect(Collectors.toList());
     }
+
+    @SuppressWarnings("MagicNumber")
+    public static List<Animal> getAnimalsCanBiteHigher100cm(List<Animal> animals) {
+        return animals.stream()
+            .filter(x -> (x.bites() && x.height() > 100))
+            .collect(Collectors.toList());
+    }
 }

@@ -10,6 +10,7 @@ import java.util.List;
 import java.util.Optional;
 import static edu.hw4.AnimalUtil.countPaws;
 import static edu.hw4.AnimalUtil.getAnimalsAgeNotEqualPaws;
+import static edu.hw4.AnimalUtil.getAnimalsCanBiteHigher100cm;
 import static edu.hw4.AnimalUtil.getEachTypeAmount;
 import static edu.hw4.AnimalUtil.getEachTypeHeaviestAnimal;
 import static edu.hw4.AnimalUtil.getHeaviestAnimalUnderKcmHeight;
@@ -22,8 +23,7 @@ import static org.assertj.core.api.AssertionsForClassTypes.assertThat;
 import static org.junit.jupiter.api.Assertions.assertIterableEquals;
 
 public class AnimalUtilTest {
-    Animal marginal, milesMorales, perro, sobaka, pug, salmon, tuna
-        , raven, baldEagle, nyanCat, grumpyCat;
+    Animal marginal, milesMorales, perro, sobaka, pug, salmon, tuna, raven, baldEagle, nyanCat, grumpyCat;
     List<Animal> unorderedList;
 
     @BeforeEach
@@ -77,7 +77,7 @@ public class AnimalUtilTest {
     void sortHeightAscending_nonEmptyList_sortedList() {
         var real = sortHeightAscending(unorderedList);
         var expected = Arrays.asList(raven, tuna, salmon
-                , pug, grumpyCat, perro, sobaka, baldEagle, milesMorales, marginal, nyanCat);
+            , pug, grumpyCat, perro, sobaka, baldEagle, milesMorales, marginal, nyanCat);
         assertIterableEquals(expected, real);
     }
 
@@ -241,11 +241,25 @@ public class AnimalUtilTest {
     }
 
     @Test
-    @DisplayName("Given a list in which there are such animals getAnimalsAgeNotEqualPaws produces a list without them")
+    @DisplayName("Given a list in which there are animals getAnimalsAgeNotEqualPaws produces a list without irrelevant ones")
     void getAnimalsAgeNotEqualPaws_nonEmptyList_listOfEligibleAnimals() {
         var expected = new ArrayList<>(unorderedList);
         expected.remove(sobaka);
         expected.remove(raven);
         assertThat(getAnimalsAgeNotEqualPaws(unorderedList)).isEqualTo(expected);
+    }
+
+    @Test
+    @DisplayName("Given an empty list getAnimalsCanBiteHigher100cm produces an empty list")
+    void getAnimalsCanBiteHigher100cm_emptyList_emptyList() {
+        assertThat(getAnimalsCanBiteHigher100cm(new ArrayList<>())).isEqualTo(new ArrayList<>());
+    }
+
+    @Test
+    @DisplayName("Given a list in which there are animals getAnimalsCanBiteHigher100cm produces a list of the eligible ones")
+    void getAnimalsCanBiteHigher100cm_nonEmptyList_listOfEligibleAnimals() {
+        var expected = new ArrayList<>();
+        expected.add(marginal);
+        assertThat(getAnimalsCanBiteHigher100cm(unorderedList)).isEqualTo(expected);
     }
 }
