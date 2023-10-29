@@ -8,6 +8,7 @@ import java.util.Arrays;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Optional;
+import static edu.hw4.AnimalUtil.countPaws;
 import static edu.hw4.AnimalUtil.getEachTypeAmount;
 import static edu.hw4.AnimalUtil.getEachTypeHeaviestAnimal;
 import static edu.hw4.AnimalUtil.getHeaviestAnimalUnderKcmHeight;
@@ -218,5 +219,17 @@ public class AnimalUtilTest {
     void getHeaviestAnimalUnderKcmHeight_suchAnimalsPresent_heaviestOfTheEligible() {
         assertThat(getHeaviestAnimalUnderKcmHeight(unorderedList, 70))
             .isEqualTo(Optional.of(perro));
+    }
+
+    @Test
+    @DisplayName("Number of Paws in an empty list is zero")
+    void countPaws_emptyList_zero() {
+        assertThat(countPaws(new ArrayList<>())).isEqualTo(0);
+    }
+
+    @Test
+    @DisplayName("Number of Paws in a non-empty list")
+    void countPaws_nonEmptyList_totalAmount() {
+        assertThat(countPaws(unorderedList)).isEqualTo(40);
     }
 }

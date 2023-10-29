@@ -52,10 +52,9 @@ public class AnimalUtil {
     }
 
     public static Map<Type, Animal> getEachTypeHeaviestAnimal(List<Animal> animals) {
-        Map<Type, Animal> result = animals.stream()
+        return animals.stream()
             .collect(Collectors.toMap(Animal::type, x -> x,
                 BinaryOperator.maxBy(Comparator.comparing(Animal::weight))));
-        return result;
     }
 
     public static Animal getKthOldestAnimal(List<Animal> animals, long k) {
@@ -70,5 +69,11 @@ public class AnimalUtil {
         return animals.stream()
             .filter(x -> x.height() < k)
             .max(Comparator.comparingInt(Animal::weight));
+    }
+
+    public static Integer countPaws(List<Animal> animals) {
+        return animals.stream()
+            .map(Animal::paws)
+            .reduce(0, Integer::sum);
     }
 }
