@@ -17,6 +17,7 @@ import static edu.hw4.AnimalUtil.getAnimalsSortedByTypeSexName;
 import static edu.hw4.AnimalUtil.getEachTypeAmount;
 import static edu.hw4.AnimalUtil.getEachTypeHeaviestAnimal;
 import static edu.hw4.AnimalUtil.getHeaviestAnimalUnderKcmHeight;
+import static edu.hw4.AnimalUtil.getHeaviestFish;
 import static edu.hw4.AnimalUtil.getKTopWeighing;
 import static edu.hw4.AnimalUtil.getKthOldestAnimal;
 import static edu.hw4.AnimalUtil.getLongestNameAnimal;
@@ -386,5 +387,22 @@ public class AnimalUtilTest {
         unorderedList.remove(perro);
         unorderedList.remove(sobaka);
         assertThat(spidersBiteMoreThanDogs(unorderedList)).isFalse();
+    }
+
+    @Test
+    @DisplayName("No heaviest fish in an empty stream")
+    void getHeaviestFish_emptyList_null() {
+        assertThat(getHeaviestFish(new ArrayList<>())).isNull();
+    }
+
+    @Test
+    @DisplayName("Heaviest fish in a list of lists of animals")
+    void getHeaviestFish_normalList_heaviestFishOverall() {
+        var listOfLists = new ArrayList<List<Animal>>();
+        listOfLists.add(List.of());
+        listOfLists.add(List.of(pug, milesMorales, nyanCat));
+        listOfLists.add(List.of(salmon, sobaka));
+        listOfLists.add(List.of(tuna, nyanCat));
+        assertThat(getHeaviestFish(listOfLists)).isEqualTo(salmon);
     }
 }

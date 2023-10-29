@@ -133,4 +133,12 @@ public class AnimalUtil {
         }
         return portions.get(Type.SPIDER) > portions.get(Type.DOG);
     }
+
+    public static Animal getHeaviestFish(List<List<Animal>> animals) {
+        return animals.stream()
+            .flatMap(List::stream)
+            .filter(x -> x.type() == Type.FISH)
+            .max(Comparator.comparingInt(Animal::weight))
+            .orElse(null);
+    }
 }
