@@ -13,6 +13,7 @@ import static edu.hw4.AnimalUtil.countPaws;
 import static edu.hw4.AnimalUtil.getAnimalsAgeNotEqualPaws;
 import static edu.hw4.AnimalUtil.getAnimalsCanBiteHigher100cm;
 import static edu.hw4.AnimalUtil.getAnimalsNameSeveralWords;
+import static edu.hw4.AnimalUtil.getAnimalsSortedByTypeSexName;
 import static edu.hw4.AnimalUtil.getEachTypeAmount;
 import static edu.hw4.AnimalUtil.getEachTypeHeaviestAnimal;
 import static edu.hw4.AnimalUtil.getHeaviestAnimalUnderKcmHeight;
@@ -241,7 +242,7 @@ public class AnimalUtilTest {
     @Test
     @DisplayName("Given an empty list getAnimalsAgeNotEqualPaws produces an empty list")
     void getAnimalsAgeNotEqualPaws_emptyList_emptyList() {
-        assertThat(getAnimalsAgeNotEqualPaws(new ArrayList<>())).isEqualTo(new ArrayList<>());
+        assertIterableEquals(new ArrayList<>(), getAnimalsAgeNotEqualPaws(new ArrayList<>()));
     }
 
     @Test
@@ -250,13 +251,13 @@ public class AnimalUtilTest {
         var expected = new ArrayList<>(unorderedList);
         expected.remove(sobaka);
         expected.remove(raven);
-        assertThat(getAnimalsAgeNotEqualPaws(unorderedList)).isEqualTo(expected);
+        assertIterableEquals(expected, getAnimalsAgeNotEqualPaws(unorderedList));
     }
 
     @Test
     @DisplayName("Given an empty list getAnimalsCanBiteHigher100cm produces an empty list")
     void getAnimalsCanBiteHigher100cm_emptyList_emptyList() {
-        assertThat(getAnimalsCanBiteHigher100cm(new ArrayList<>())).isEqualTo(new ArrayList<>());
+        assertIterableEquals(new ArrayList<>(), getAnimalsCanBiteHigher100cm(new ArrayList<>()));
     }
 
     @Test
@@ -264,7 +265,7 @@ public class AnimalUtilTest {
     void getAnimalsCanBiteHigher100cm_nonEmptyList_listOfEligibleAnimals() {
         var expected = new ArrayList<>();
         expected.add(marginal);
-        assertThat(getAnimalsCanBiteHigher100cm(unorderedList)).isEqualTo(expected);
+        assertIterableEquals(expected, getAnimalsCanBiteHigher100cm(unorderedList));
     }
 
     @Test
@@ -282,7 +283,7 @@ public class AnimalUtilTest {
     @Test
     @DisplayName("No animals with names of length > 1 word in empty list")
     void getAnimalsNameSeveralWords_emptyList_emptyList() {
-        assertThat(getAnimalsNameSeveralWords(new ArrayList<>())).isEqualTo(new ArrayList<>());
+        assertIterableEquals(new ArrayList<>(), getAnimalsNameSeveralWords(new ArrayList<>()));
     }
 
     @Test
@@ -293,7 +294,7 @@ public class AnimalUtilTest {
         expected.add(baldEagle);
         expected.add(nyanCat);
         expected.add(grumpyCat);
-        assertThat(getAnimalsNameSeveralWords(unorderedList)).isEqualTo(expected);
+        assertIterableEquals(expected, getAnimalsNameSeveralWords(unorderedList));
     }
 
     @Test
@@ -326,5 +327,19 @@ public class AnimalUtilTest {
     void sumWeightAnimalsKtoLYearsOldInclusive_nonEmptyList_totalSum() {
         assertThat(sumWeightAnimalsKtoLYearsOldInclusive(
             unorderedList, 10, 20)).isEqualTo(10074);
+    }
+
+    @Test
+    @DisplayName("Sorted empty list remains empty list")
+    void getAnimalsSortedByTypeSexName_emptyList_emptyList() {
+        assertThat(getAnimalsSortedByTypeSexName(new ArrayList<>())).isEqualTo(new ArrayList<>());
+    }
+
+    @Test
+    @DisplayName("Animals with names longer than 1 word in a list")
+    void getAnimalsSortedByTypeSexName_nonEmptyList_listOfEligibleAnimals() {
+        var expected = Arrays.asList(grumpyCat, nyanCat, perro, sobaka, pug,
+            baldEagle, raven, tuna, salmon, marginal, milesMorales);
+        assertIterableEquals(expected, getAnimalsSortedByTypeSexName(unorderedList));
     }
 }

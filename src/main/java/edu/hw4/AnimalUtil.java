@@ -113,4 +113,12 @@ public class AnimalUtil {
             .map(Animal::weight)
             .reduce(0, Integer::sum);
     }
+
+    public static List<Animal> getAnimalsSortedByTypeSexName(List<Animal> animals) {
+        return animals.stream()
+            .sorted(Comparator.comparing(Animal::type)
+                .thenComparing(Animal::sex)
+                .thenComparing(Animal::name))
+            .collect(Collectors.toList());
+    }
 }
