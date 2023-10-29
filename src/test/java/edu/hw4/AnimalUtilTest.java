@@ -23,6 +23,7 @@ import static edu.hw4.AnimalUtil.getLongestNameAnimal;
 import static edu.hw4.AnimalUtil.getMostAnimalsSex;
 import static edu.hw4.AnimalUtil.isInListDogHigherKcm;
 import static edu.hw4.AnimalUtil.sortHeightAscending;
+import static edu.hw4.AnimalUtil.spidersBiteMoreThanDogs;
 import static edu.hw4.AnimalUtil.sumWeightAnimalsKtoLYearsOldInclusive;
 import static org.assertj.core.api.AssertionsForClassTypes.assertThat;
 import static org.junit.jupiter.api.Assertions.assertIterableEquals;
@@ -341,5 +342,49 @@ public class AnimalUtilTest {
         var expected = Arrays.asList(grumpyCat, nyanCat, perro, sobaka, pug,
             baldEagle, raven, tuna, salmon, marginal, milesMorales);
         assertIterableEquals(expected, getAnimalsSortedByTypeSexName(unorderedList));
+    }
+
+    @Test
+    @DisplayName("When lis is empty false is returned")
+    void spidersBiteMoreThanDogs_emptyList_false() {
+        assertThat(spidersBiteMoreThanDogs(new ArrayList<>())).isFalse();
+    }
+
+    @Test
+    @DisplayName("Larger portion of spiders bites -> true")
+    void spidersBiteMoreThanDogs_nonEmptyList_true() {
+        unorderedList.remove(milesMorales);
+        assertThat(spidersBiteMoreThanDogs(unorderedList)).isTrue();
+    }
+
+    @Test
+    @DisplayName("Larger portion of dogs bites -> false")
+    void spidersBiteMoreThanDogs_nonEmptyList_false() {
+        assertThat(spidersBiteMoreThanDogs(unorderedList)).isFalse();
+    }
+
+    @Test
+    @DisplayName("Equal portions of dogs and spiders bite -> false")
+    void spidersBiteMoreThanDogs_equalPortions_false() {
+        unorderedList.remove(milesMorales);
+        unorderedList.remove(pug);
+        assertThat(spidersBiteMoreThanDogs(unorderedList)).isFalse();
+    }
+
+    @Test
+    @DisplayName("When no spiders false is returned")
+    void isInListDogHigherKcm_noSpiders_false() {
+        unorderedList.remove(milesMorales);
+        unorderedList.remove(marginal);
+        assertThat(spidersBiteMoreThanDogs(unorderedList)).isFalse();
+    }
+
+    @Test
+    @DisplayName("When no dogs false is returned")
+    void isInListDogHigherKcm_noDogs_false() {
+        unorderedList.remove(pug);
+        unorderedList.remove(perro);
+        unorderedList.remove(sobaka);
+        assertThat(spidersBiteMoreThanDogs(unorderedList)).isFalse();
     }
 }

@@ -121,4 +121,16 @@ public class AnimalUtil {
                 .thenComparing(Animal::name))
             .collect(Collectors.toList());
     }
+
+    public static Boolean spidersBiteMoreThanDogs(List<Animal> animals) {
+        var portions = animals.stream()
+            .filter(x -> x.type() == Type.SPIDER || x.type() == Type.DOG)
+            .collect(Collectors.groupingBy(
+                Animal::type,
+                Collectors.averagingDouble(x -> x.bites() ? 1 : 0)));
+        if (!portions.containsKey(Type.DOG) || !portions.containsKey(Type.SPIDER)) {
+            return false;
+        }
+        return portions.get(Type.SPIDER) > portions.get(Type.DOG);
+    }
 }
