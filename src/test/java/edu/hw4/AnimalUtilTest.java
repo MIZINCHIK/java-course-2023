@@ -8,6 +8,7 @@ import java.util.Arrays;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Optional;
+import java.util.Set;
 import static edu.hw4.AnimalUtil.countAnimalWeightOverHeight;
 import static edu.hw4.AnimalUtil.countPaws;
 import static edu.hw4.AnimalUtil.getAnimalsAgeNotEqualPaws;
@@ -22,6 +23,8 @@ import static edu.hw4.AnimalUtil.getKTopWeighing;
 import static edu.hw4.AnimalUtil.getKthOldestAnimal;
 import static edu.hw4.AnimalUtil.getLongestNameAnimal;
 import static edu.hw4.AnimalUtil.getMostAnimalsSex;
+import static edu.hw4.AnimalUtil.getValidationErrors;
+import static edu.hw4.AnimalUtil.getValidationErrorsPretty;
 import static edu.hw4.AnimalUtil.isInListDogHigherKcm;
 import static edu.hw4.AnimalUtil.sortHeightAscending;
 import static edu.hw4.AnimalUtil.spidersBiteMoreThanDogs;
@@ -404,5 +407,63 @@ public class AnimalUtilTest {
         listOfLists.add(List.of(salmon, sobaka));
         listOfLists.add(List.of(tuna, nyanCat));
         assertThat(getHeaviestFish(listOfLists)).isEqualTo(salmon);
+    }
+
+    @Test
+    @DisplayName("No validation errors in empty list")
+    void getValidationErrors_emptyList_emptyMap() {
+        assertThat(getValidationErrors(new ArrayList<>())).isEqualTo(new HashMap<>());
+    }
+
+    @Test
+    @DisplayName("Getting validation errors for each animal in a stream")
+    void getValidationErrors_nonEmptyList_eligibleErrors() {
+        var animals = List.of(
+            new Animal("1", Type.BIRD, Sex.F, 12, 342, 2332, true),
+            new Animal("2", null, Sex.F, 12, 342, 2332, true),
+            new Animal("3", Type.BIRD, null, 12, 342, 2332, true),
+            new Animal("4", Type.BIRD, Sex.F, -1, 342, 2332, true),
+            new Animal("5", Type.BIRD, Sex.F, 12, -1, 2332, true),
+            new Animal("6", Type.BIRD, Sex.F, 12, 342, -1, true),
+            new Animal("7", Type.BIRD, null, -1, 342, -1, true)
+        );
+        var expected = new HashMap<String, Set<ValidationError>>();
+        expected.put("1", Set.of());
+        expected.put("2", Set.of(ValidationError.NULL_TYPE));
+        expected.put("3", Set.of(ValidationError.NULL_SEX));
+        expected.put("4", Set.of(ValidationError.NEGATIVE_AGE));
+        expected.put("5", Set.of(ValidationError.NEGATIVE_HEIGHT));
+        expected.put("6", Set.of(ValidationError.NEGATIVE_WEIGHT));
+        expected.put("7", Set.of(ValidationError.NULL_SEX, ValidationError.NEGATIVE_AGE, ValidationError.NEGATIVE_WEIGHT));
+        assertThat(getValidationErrors(animals)).isEqualTo(expected);
+    }
+
+    @Test
+    @DisplayName("No pretty validation errors in empty list")
+    void getValidationErrorsPretty_emptyList_emptyMap() {
+        assertThat(getValidationErrorsPretty(new ArrayList<>())).isEqualTo(new HashMap<>());
+    }
+
+    @Test
+    @DisplayName("Getting pretty validation errors for each animal in a stream")
+    void getValidationErrorsPretty_nonEmptyList_eligibleErrors() {
+        var animals = List.of(
+            new Animal("1", Type.BIRD, Sex.F, 12, 342, 2332, true),
+            new Animal("2", null, Sex.F, 12, 342, 2332, true),
+            new Animal("3", Type.BIRD, null, 12, 342, 2332, true),
+            new Animal("4", Type.BIRD, Sex.F, -1, 342, 2332, true),
+            new Animal("5", Type.BIRD, Sex.F, 12, -1, 2332, true),
+            new Animal("6", Type.BIRD, Sex.F, 12, 342, -1, true),
+            new Animal("7", Type.BIRD, null, -1, 342, -1, true)
+        );
+        var expected = new HashMap<String, String>();
+        expected.put("1", "");
+        expected.put("2", "type");
+        expected.put("3", "sex");
+        expected.put("4", "age");
+        expected.put("5", "height");
+        expected.put("6", "weight");
+        expected.put("7", "weight, age, sex");
+        assertThat(getValidationErrorsPretty(animals)).isEqualTo(expected);
     }
 }

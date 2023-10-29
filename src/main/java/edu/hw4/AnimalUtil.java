@@ -2,9 +2,11 @@ package edu.hw4;
 
 import java.util.Comparator;
 import java.util.EnumSet;
+import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 import java.util.Optional;
+import java.util.Set;
 import java.util.function.BinaryOperator;
 import java.util.stream.Collectors;
 
@@ -140,5 +142,19 @@ public class AnimalUtil {
             .filter(x -> x.type() == Type.FISH)
             .max(Comparator.comparingInt(Animal::weight))
             .orElse(null);
+    }
+
+    public static Map<String, Set<ValidationError>> getValidationErrors(List<Animal> animals) {
+        return animals.stream()
+            .collect(Collectors.toMap(Animal::name, ValidationError::getAnimalErrors));
+    }
+
+    public static Map<String, String> getValidationErrorsPretty(List<Animal> animals) {
+        var result = new HashMap<String, String>();
+        getValidationErrors(animals).forEach(
+            (key, value) -> result.put(key, value.stream()
+                        .map(ValidationError::getField)
+                        .collect(Collectors.joining(", "))));
+        return result;
     }
 }
