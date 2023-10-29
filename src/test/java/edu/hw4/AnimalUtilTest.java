@@ -8,6 +8,7 @@ import java.util.Arrays;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Optional;
+import static edu.hw4.AnimalUtil.countAnimalWeightOverHeight;
 import static edu.hw4.AnimalUtil.countPaws;
 import static edu.hw4.AnimalUtil.getAnimalsAgeNotEqualPaws;
 import static edu.hw4.AnimalUtil.getAnimalsCanBiteHigher100cm;
@@ -261,5 +262,17 @@ public class AnimalUtilTest {
         var expected = new ArrayList<>();
         expected.add(marginal);
         assertThat(getAnimalsCanBiteHigher100cm(unorderedList)).isEqualTo(expected);
+    }
+
+    @Test
+    @DisplayName("Number of animals with weight higher than height in empty list is 0")
+    void countAnimalWeightOverHeight_emptyList_0() {
+        assertThat(countAnimalWeightOverHeight(new ArrayList<>())).isEqualTo(0);
+    }
+
+    @Test
+    @DisplayName("Number of animals with weight higher than height in a non-empty list")
+    void countAnimalWeightOverHeight_nonEmptyList_amount() {
+        assertThat(countAnimalWeightOverHeight(unorderedList)).isEqualTo(2);
     }
 }

@@ -1,5 +1,7 @@
 package edu.hw4;
 
+import org.jetbrains.annotations.NotNull;
+import org.jetbrains.annotations.Range;
 import java.util.Comparator;
 import java.util.EnumSet;
 import java.util.List;
@@ -88,5 +90,12 @@ public class AnimalUtil {
         return animals.stream()
             .filter(x -> (x.bites() && x.height() > 100))
             .collect(Collectors.toList());
+    }
+
+    @NotNull
+    public static Integer countAnimalWeightOverHeight(List<Animal> animals) {
+        return (int) animals.stream()
+            .filter(x -> x.weight() > x.height())
+            .count();
     }
 }
