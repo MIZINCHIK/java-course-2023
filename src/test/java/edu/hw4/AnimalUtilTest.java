@@ -10,6 +10,7 @@ import java.util.List;
 import static edu.hw4.AnimalUtil.getEachTypeAmount;
 import static edu.hw4.AnimalUtil.getEachTypeHeaviestAnimal;
 import static edu.hw4.AnimalUtil.getKTopWeighing;
+import static edu.hw4.AnimalUtil.getKthOldestAnimal;
 import static edu.hw4.AnimalUtil.getLongestNameAnimal;
 import static edu.hw4.AnimalUtil.getMostAnimalsSex;
 import static edu.hw4.AnimalUtil.sortHeightAscending;
@@ -172,5 +173,29 @@ public class AnimalUtilTest {
         expected.put(Type.SPIDER, marginal);
         expected.put(Type.CAT, nyanCat);
         assertThat(getEachTypeHeaviestAnimal(unorderedList)).isEqualTo(expected);
+    }
+
+    @Test
+    @DisplayName("K-th oldest animal in an empty list is null")
+    void getKthOldestAnimal_emptyList_null() {
+        assertThat(getKthOldestAnimal(new ArrayList<>(), 1)).isNull();
+    }
+
+    @Test
+    @DisplayName("K-th oldest animal in list of size k is the overall youngest animal")
+    void getKthOldestAnimal_lastIndex_youngestAnimalOverall() {
+        assertThat(getKthOldestAnimal(unorderedList, unorderedList.size())).isEqualTo(salmon);
+    }
+
+    @Test
+    @DisplayName("K-th oldest animal in list of size less than k is null")
+    void getKthOldestAnimal_indexOutOfBounds_null() {
+        assertThat(getKthOldestAnimal(unorderedList, unorderedList.size() + 1)).isNull();
+    }
+
+    @Test
+    @DisplayName("K-th oldest animal in list of size less than k is null")
+    void getKthOldestAnimal_indexInside_kthOldestAnimal() {
+        assertThat(getKthOldestAnimal(unorderedList, 3)).isEqualTo(nyanCat);
     }
 }

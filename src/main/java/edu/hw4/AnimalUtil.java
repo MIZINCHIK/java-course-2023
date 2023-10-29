@@ -36,7 +36,8 @@ public class AnimalUtil {
 
     public static Animal getLongestNameAnimal(List<Animal> animals) {
         return animals.stream()
-            .max(Comparator.comparingInt(x -> x.name().length())).orElse(null);
+            .max(Comparator.comparingInt(x -> x.name().length()))
+            .orElse(null);
     }
 
     public static Sex getMostAnimalsSex(List<Animal> animals) {
@@ -44,7 +45,7 @@ public class AnimalUtil {
             .collect(Collectors.groupingBy(Animal::sex, Collectors.counting()))
             .entrySet()
             .stream()
-            .max(Comparator.comparingLong(Map.Entry::getValue))
+            .max(Map.Entry.comparingByValue())
             .map(Map.Entry::getKey)
             .orElse(null);
     }
@@ -54,5 +55,13 @@ public class AnimalUtil {
             .collect(Collectors.toMap(Animal::type, x -> x,
                 BinaryOperator.maxBy(Comparator.comparing(Animal::weight))));
         return result;
+    }
+
+    public static Animal getKthOldestAnimal(List<Animal> animals, long k) {
+        return animals.stream()
+            .sorted(Comparator.comparingInt(Animal::age).reversed())
+            .skip(k - 1)
+            .findFirst()
+            .orElse(null);
     }
 }
