@@ -15,12 +15,13 @@ import java.util.Stack;
 
 public class EllerMazeGenerator implements MazeGenerator {
     private static final int CHANCE_WALL_DEMOLITION = 25;
-    private static final int MAX_CHANCE = 25;
+    private static final int MAX_CHANCE = 100;
     private int width;
     private int height;
     private Stack<Integer> freeIndices;
     private int[] clusterIndices;
     private Map<Integer, Set<Integer>> clusters;
+    private Random random;
 
     private void initStructures(Maze maze) {
         this.width = maze.getWidth();
@@ -28,6 +29,7 @@ public class EllerMazeGenerator implements MazeGenerator {
         clusterIndices = new int[width];
         clusters = new HashMap<>();
         freeIndices = new Stack<>();
+        random = new Random();
         int largestIndex = Math.ceilDiv(width, 2);
         for (int i = 1; i <= largestIndex; i++) {
             freeIndices.push(i);
@@ -138,7 +140,6 @@ public class EllerMazeGenerator implements MazeGenerator {
     private Set<Integer> getRandomSubset(Set<Integer> set) {
         List<Integer> list = new ArrayList<>(set);
         Collections.shuffle(list);
-        Random random = new Random();
         int listSize = list.size();
         int startIndex = random.nextInt(listSize);
         int endIndex = random.nextInt(listSize - startIndex) + startIndex + 1;
