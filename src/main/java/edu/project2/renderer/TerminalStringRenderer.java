@@ -7,9 +7,9 @@ import edu.project2.maze.cells.Coordinate;
 public class TerminalStringRenderer implements StringRenderer {
     private static final String WALL_SYMBOL = "▉▉▉";
     private static final String PASSAGE_SYMBOL = "   ";
-    private static final String PATH_SYMBOL = ".";
-    private static final String OFF_LIMITS_SYMBOL = "⚠";
-    private static final String NONE_SYMBOL = "∅";
+    private static final String PATH_SYMBOL = "...";
+    private static final String OFF_LIMITS_SYMBOL = "⚠⚠⚠";
+    private static final String NONE_SYMBOL = "∅∅∅";
 
     @Override
     public String render(Maze maze) {
