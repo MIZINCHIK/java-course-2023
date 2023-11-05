@@ -34,7 +34,7 @@ public class TerminalStringRenderer implements StringRenderer {
 
     @Override
     public String render(CellType type) {
-        return switch(type) {
+        return switch (type) {
             case WALL -> WALL_SYMBOL;
             case PASSAGE -> PASSAGE_SYMBOL;
             case PATH -> PATH_SYMBOL;

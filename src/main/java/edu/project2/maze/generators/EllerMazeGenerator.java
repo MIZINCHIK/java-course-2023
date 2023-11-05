@@ -15,6 +15,7 @@ import java.util.Stack;
 
 public class EllerMazeGenerator implements MazeGenerator {
     private static final int CHANCE_WALL_DEMOLITION = 25;
+    private static final int MAX_CHANCE = 25;
     private int width;
     private int height;
     private Stack<Integer> freeIndices;
@@ -125,7 +126,7 @@ public class EllerMazeGenerator implements MazeGenerator {
         Random random = new Random();
         for (int i = 1; i < width; i += 2) {
             if (clusterIndices[i + 1] != clusterIndices[i - 1]
-                && random.nextInt(100) < CHANCE_WALL_DEMOLITION) {
+                && random.nextInt(MAX_CHANCE) < CHANCE_WALL_DEMOLITION) {
                 row[i] = CellType.PASSAGE;
                 mergeClusters(clusterIndices[i - 1], clusterIndices[i + 1]);
             }
