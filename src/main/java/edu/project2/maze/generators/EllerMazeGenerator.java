@@ -41,13 +41,12 @@ public class EllerMazeGenerator implements MazeGenerator {
         divideFirstRowIntoSets(row);
         maze.setRow(0, row);
         for (int rowIndex = 1; rowIndex < height; rowIndex++) {
-            if (rowIndex == height - 1) {
-                maze.setRow(rowIndex, createFinalRow());
-                break;
-            }
             if (rowIndex % 2 == 0) {
                 row = createEmptyRow();
                 divideRowIntoSets(row);
+                if (rowIndex == height - 1) {
+                    reduceClusters(row);
+                }
             } else {
                 row = createWalledRow();
                 makePassagesDown(row);
@@ -99,12 +98,6 @@ public class EllerMazeGenerator implements MazeGenerator {
         }
     }
 
-    private CellType[] createFinalRow() {
-        CellType[] row = new CellType[width];
-        Arrays.fill(row, CellType.PASSAGE);
-        return row;
-    }
-
     private CellType[] createEmptyRow() {
         CellType[] row = new CellType[width];
         for (int i = 0; i < width; i += 2) {
@@ -127,6 +120,15 @@ public class EllerMazeGenerator implements MazeGenerator {
         for (int i = 1; i < width; i += 2) {
             if (clusterIndices[i + 1] != clusterIndices[i - 1]
                 && random.nextInt(MAX_CHANCE) < CHANCE_WALL_DEMOLITION) {
+                row[i] = CellType.PASSAGE;
+                mergeClusters(clusterIndices[i - 1], clusterIndices[i + 1]);
+            }
+        }
+    }
+
+    private void reduceClusters(CellType[] row) {
+        for (int i = 1; i < width; i += 2) {
+            if (clusterIndices[i + 1] != clusterIndices[i - 1]) {
                 row[i] = CellType.PASSAGE;
                 mergeClusters(clusterIndices[i - 1], clusterIndices[i + 1]);
             }
