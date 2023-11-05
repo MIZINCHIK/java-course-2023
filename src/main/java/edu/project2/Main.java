@@ -17,11 +17,13 @@ public class Main {
     }
 
     public static void main(String[] args) {
-//        var mazeGenerator = new EllerMazeGenerator();
-        var mazeGenerator = new RecursiveBackTrackerGenerator();
+        var ellerMazeGenerator = new EllerMazeGenerator();
         Maze maze = new Maze(EXAMPLE_SIZE, EXAMPLE_SIZE);
-        mazeGenerator.fillMaze(maze);
+        ellerMazeGenerator.fillMaze(maze);
         StringRenderer renderer = new TerminalStringRenderer();
+        LOGGER.info(System.lineSeparator() + renderer.render(maze));
+        var dfsMazeGenerator = new RecursiveBackTrackerGenerator();
+        dfsMazeGenerator.fillMaze(maze);
         LOGGER.info(System.lineSeparator() + renderer.render(maze));
     }
 }
