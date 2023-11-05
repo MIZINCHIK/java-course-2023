@@ -64,13 +64,13 @@ public final class Maze {
         return column < 0 || column >= width;
     }
 
-    private void markPath(List<Coordinate> path) {
+    public void markPath(List<Coordinate> path) {
         for (Coordinate coordinate : path) {
             grid[coordinate.row()][coordinate.column()] = CellType.PATH;
         }
     }
 
-    private void cleanUp() {
+    public void cleanUp() {
         for (int row = 0; row < height; row++) {
             for (int column = 0; column < width; column++) {
                 if (grid[row][column] == CellType.PATH) {
