@@ -12,12 +12,14 @@ import java.util.stream.Collectors;
 public class RecursiveBackTrackerGenerator implements MazeGenerator {
     private int width;
     private int height;
+    private Maze maze;
     private Stack<Coordinate> visited;
     private Random random;
 
-    private void initStructures(Maze maze) {
-        this.width = maze.getWidth();
-        this.height = maze.getHeight();
+    private void initStructures(int height, int width) {
+        this.maze = new Maze(height, width);
+        this.width = width;
+        this.height = height;
         visited = new Stack<>();
         random = new Random();
         for (int row = 0; row < height; row++) {
@@ -26,27 +28,28 @@ public class RecursiveBackTrackerGenerator implements MazeGenerator {
     }
 
     @Override
-    public void fillMaze(Maze maze) {
-        initStructures(maze);
-        setWalls(maze);
+    public Maze generateMaze(int height, int width) {
+        initStructures(height, width);
+        setWalls();
         Coordinate startingPoint = chooseRandomStart();
         maze.setCellType(startingPoint, CellType.PASSAGE);
         visited.push(startingPoint);
         while (!visited.empty()) {
             Coordinate currentCell = visited.pop();
-            List<Coordinate> unvisitedNeighbours = getUnvisitedNeighbours(currentCell, maze);
+            List<Coordinate> unvisitedNeighbours = getUnvisitedNeighbours(currentCell);
             if (unvisitedNeighbours.isEmpty()) {
                 continue;
             }
             visited.push(currentCell);
             Coordinate nextCell = unvisitedNeighbours.get(0);
             maze.setCellType(nextCell, CellType.PASSAGE);
-            removeWallBetween(currentCell, nextCell, maze);
+            removeWallBetween(currentCell, nextCell);
             visited.push(nextCell);
         }
+        return maze;
     }
 
-    private void setWalls(Maze maze) {
+    private void setWalls() {
         for (int row = 1; row < height; row += 2) {
             for (int column = 0; column < width; column++) {
                 maze.setCellType(new Coordinate(row, column), CellType.WALL);
@@ -65,16 +68,16 @@ public class RecursiveBackTrackerGenerator implements MazeGenerator {
         return new Coordinate(randomRow, randomColumn);
     }
 
-    private List<Coordinate> getUnvisitedNeighbours(Coordinate point, Maze maze) {
+    private void removeWallBetween(Coordinate cellA, Coordinate cellB) {
+        maze.setCellType(new Coordinate((cellA.row() + cellB.row()) / 2,
+            (cellA.column() + cellB.column()) / 2), CellType.PASSAGE);
+    }
+
+    private List<Coordinate> getUnvisitedNeighbours(Coordinate point) {
         var result = point.getNeighbours(2).stream()
             .filter(neighbour -> maze.getCell(neighbour) == CellType.NONE)
             .collect(Collectors.toList());
         Collections.shuffle(result);
         return result;
-    }
-
-    private void removeWallBetween(Coordinate cellA, Coordinate cellB, Maze maze) {
-        maze.setCellType(new Coordinate((cellA.row() + cellB.row()) / 2,
-            (cellA.column() + cellB.column()) / 2), CellType.PASSAGE);
     }
 }

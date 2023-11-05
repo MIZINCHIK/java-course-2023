@@ -13,19 +13,19 @@ import java.util.Random;
 import java.util.Set;
 import java.util.Stack;
 
-public class EllerMazeGenerator implements MazeGenerator {
-    private static final int CHANCE_WALL_DEMOLITION = 25;
+public class EllerGenerator implements MazeGenerator {
+    private static final int CHANCE_WALL_DEMOLITION = 50;
     private static final int MAX_CHANCE = 100;
     private int width;
-    private int height;
+    private Maze maze;
     private Stack<Integer> freeIndices;
     private int[] clusterIndices;
     private Map<Integer, Set<Integer>> clusters;
     private Random random;
 
-    private void initStructures(Maze maze) {
-        this.width = maze.getWidth();
-        this.height = maze.getHeight();
+    private void initStructures(int height, int width) {
+        this.maze = new Maze(height, width);
+        this.width = width;
         clusterIndices = new int[width];
         clusters = new HashMap<>();
         freeIndices = new Stack<>();
@@ -37,8 +37,8 @@ public class EllerMazeGenerator implements MazeGenerator {
     }
 
     @Override
-    public void fillMaze(Maze maze) {
-        initStructures(maze);
+    public Maze generateMaze(int height, int width) {
+        initStructures(height, width);
         CellType[] row = createEmptyRow();
         divideFirstRowIntoSets(row);
         maze.setRow(0, row);
@@ -55,6 +55,7 @@ public class EllerMazeGenerator implements MazeGenerator {
             }
             maze.setRow(rowIndex, row);
         }
+        return maze;
     }
 
     private void divideFirstRowIntoSets(CellType[] row) {
