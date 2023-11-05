@@ -20,6 +20,9 @@ public class RecursiveBackTrackerGenerator implements MazeGenerator {
         this.height = maze.getHeight();
         visited = new Stack<>();
         random = new Random();
+        for (int row = 0; row < height; row++) {
+            maze.setRow(row, new CellType[width]);
+        }
     }
 
     @Override
