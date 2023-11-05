@@ -2,6 +2,7 @@ package edu.project2.maze;
 
 import edu.project2.maze.cells.CellType;
 import edu.project2.maze.cells.Coordinate;
+import java.util.List;
 
 public final class Maze {
     private final int height;
@@ -61,5 +62,21 @@ public final class Maze {
 
     private boolean isColumnOffLimits(int column) {
         return column < 0 || column >= width;
+    }
+
+    private void markPath(List<Coordinate> path) {
+        for (Coordinate coordinate : path) {
+            grid[coordinate.row()][coordinate.column()] = CellType.PATH;
+        }
+    }
+
+    private void cleanUp() {
+        for (int row = 0; row < height; row++) {
+            for (int column = 0; column < width; column++) {
+                if (grid[row][column] == CellType.PATH) {
+                    grid[row][column] = CellType.PASSAGE;
+                }
+            }
+        }
     }
 }
