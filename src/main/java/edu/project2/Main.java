@@ -2,6 +2,7 @@ package edu.project2;
 
 import edu.project2.maze.Maze;
 import edu.project2.maze.generators.EllerMazeGenerator;
+import edu.project2.maze.generators.RecursiveBackTrackerGenerator;
 import edu.project2.renderer.StringRenderer;
 import edu.project2.renderer.TerminalStringRenderer;
 import org.apache.logging.log4j.LogManager;
@@ -16,7 +17,8 @@ public class Main {
     }
 
     public static void main(String[] args) {
-        var mazeGenerator = new EllerMazeGenerator();
+//        var mazeGenerator = new EllerMazeGenerator();
+        var mazeGenerator = new RecursiveBackTrackerGenerator();
         Maze maze = new Maze(EXAMPLE_SIZE, EXAMPLE_SIZE);
         mazeGenerator.fillMaze(maze);
         StringRenderer renderer = new TerminalStringRenderer();
