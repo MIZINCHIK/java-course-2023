@@ -19,11 +19,18 @@ public class DeadEndFillerSolver implements MazeSolver {
 
     @Override
     public List<Coordinate> getPath(Maze maze, Coordinate start, Coordinate end) {
+        if (maze.getCell(start) == CellType.WALL || maze.getCell(end) == CellType.WALL) {
+            return new ArrayList<>();
+        }
         initStructures(maze, start, end);
         for (int row = 0; row < height; row += 2) {
             for (int column = 0; column < width; column += 2) {
                 fillDeadEnds(new Coordinate(row, column));
             }
+        }
+        if (getAvailableNeighbours(start).isEmpty()
+        || getAvailableNeighbours(end).isEmpty()) {
+            return new ArrayList<>();
         }
         return fillPath();
     }
@@ -59,14 +66,17 @@ public class DeadEndFillerSolver implements MazeSolver {
 
     private List<Coordinate> fillPath() {
         List<Coordinate> result = new ArrayList<>();
-        for (int row = 0; row < height; row++) {
-            for (int column = 0; column < width; column++) {
-                Coordinate point = new Coordinate(row, column);
-                if (maze.getCell(point) == CellType.PASSAGE && !noWay.contains(point)) {
-                    result.add(point);
-                }
+        Coordinate currentCell = start;
+        while (!currentCell.equals(end)) {
+            List<Coordinate> availableNeighbours = getAvailableNeighbours(currentCell);
+            if (availableNeighbours.isEmpty()) {
+                return new ArrayList<>();
             }
+            result.add(currentCell);
+            noWay.add(currentCell);
+            currentCell = availableNeighbours.get(0);
         }
+        result.add(currentCell);
         return result;
     }
 }
