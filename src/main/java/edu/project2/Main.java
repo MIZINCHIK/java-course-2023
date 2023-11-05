@@ -13,7 +13,7 @@ import org.apache.logging.log4j.Logger;
 
 public class Main {
     private final static Logger LOGGER = LogManager.getLogger();
-    private final static int EXAMPLE_SIZE = 51;
+    private final static int EXAMPLE_SIZE = 11; //Must be odd
 
     private Main() {
         throw new IllegalStateException();
