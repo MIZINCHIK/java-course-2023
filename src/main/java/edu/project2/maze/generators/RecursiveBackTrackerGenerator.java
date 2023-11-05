@@ -48,20 +48,20 @@ public class RecursiveBackTrackerGenerator implements MazeGenerator {
 
     private void setWalls(Maze maze) {
         for (int row = 1; row < height; row += 2) {
-            for(int column = 0; column < width; column++) {
+            for (int column = 0; column < width; column++) {
                 maze.setCellType(new Coordinate(row, column), CellType.WALL);
             }
         }
         for (int column = 1; column < width; column += 2) {
-            for(int row = 0; row < width; row++) {
+            for (int row = 0; row < width; row++) {
                 maze.setCellType(new Coordinate(row, column), CellType.WALL);
             }
         }
     }
 
     private Coordinate chooseRandomStart() {
-        int randomColumn = (random.nextInt(Math.ceilDiv(width, 2))) * 2 ;
-        int randomRow = (random.nextInt(Math.ceilDiv(height, 2))) * 2 ;
+        int randomColumn = (random.nextInt(Math.ceilDiv(width, 2))) * 2;
+        int randomRow = (random.nextInt(Math.ceilDiv(height, 2))) * 2;
         return new Coordinate(randomRow, randomColumn);
     }
 

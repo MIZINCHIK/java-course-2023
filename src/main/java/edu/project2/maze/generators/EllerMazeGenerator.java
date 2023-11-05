@@ -118,7 +118,7 @@ public class EllerMazeGenerator implements MazeGenerator {
     }
 
     private void randomClusterShuffler(CellType[] row) {
-        Random random = new Random();
+        random = new Random();
         for (int i = 1; i < width; i += 2) {
             if (clusterIndices[i + 1] != clusterIndices[i - 1]
                 && random.nextInt(MAX_CHANCE) < CHANCE_WALL_DEMOLITION) {
