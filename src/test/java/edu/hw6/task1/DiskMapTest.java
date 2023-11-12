@@ -27,7 +27,7 @@ public class DiskMapTest {
 
     @Test
     @DisplayName("Constructor for a non-existent directory")
-    void constructor_incorrectPath_illegalArgumentException() throws IOException {
+    void constructor_incorrectPath_illegalArgumentException() {
         Path path = resources
             .resolve("sadsadadsad");
         assertThatThrownBy(() -> new DiskMap(path))
