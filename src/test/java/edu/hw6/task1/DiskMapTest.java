@@ -13,13 +13,13 @@ import static org.assertj.core.api.AssertionsForClassTypes.assertThatThrownBy;
 
 public class DiskMapTest {
     private static final String RESOURCES_FROM_ROOT = "src/test/resources/edu/hw6/task1";
-    private static final Path resources = Path.of(System.getProperty("user.dir"))
+    private static final Path RESOURCES = Path.of(System.getProperty("user.dir"))
         .resolve(RESOURCES_FROM_ROOT);
 
     @Test
     @DisplayName("Normal use of constructor with a possibly non-existent storage")
     void constructor_correctPath_subDirectoryCreated() throws IOException {
-        Path path = resources
+        Path path = RESOURCES
             .resolve("empty");
         new DiskMap(path);
         assertThat(Files.exists(path)).isTrue();
@@ -28,7 +28,7 @@ public class DiskMapTest {
     @Test
     @DisplayName("Constructor for a non-existent directory")
     void constructor_incorrectPath_illegalArgumentException() {
-        Path path = resources
+        Path path = RESOURCES
             .resolve("sadsadadsad");
         assertThatThrownBy(() -> new DiskMap(path))
             .isInstanceOf(IllegalArgumentException.class)
@@ -38,7 +38,7 @@ public class DiskMapTest {
     @Test
     @DisplayName("Normal use of constructor with a possibly non-existent directory")
     void constructor_nonEmptyStorage_valuesLoaded() throws IOException {
-        Path path = resources
+        Path path = RESOURCES
             .resolve("prepared");
         var diskMap = new DiskMap(path);
         var expected = new HashMap<String, String>();
@@ -53,7 +53,7 @@ public class DiskMapTest {
     @Test
     @DisplayName("Clearing storage")
     void clear_correctPath_emptyStorage() throws IOException {
-        Path path = resources
+        Path path = RESOURCES
             .resolve("restore_my_state");
         var diskMap = new DiskMap(path);
         diskMap.put("key", "val");
@@ -68,7 +68,7 @@ public class DiskMapTest {
     @Test
     @DisplayName("Removing elements from storage")
     void remove_correctPath_success() throws IOException {
-        Path path = resources
+        Path path = RESOURCES
             .resolve("restore_my_state");
         var diskMap = new DiskMap(path);
         diskMap.put("key", "val");
@@ -86,7 +86,7 @@ public class DiskMapTest {
     @Test
     @DisplayName("Removing elements from storage")
     void remove_fileRemovedIndependently_keyValueConsistencyException() throws IOException {
-        Path path = resources
+        Path path = RESOURCES
             .resolve("restore_my_state");
         var diskMap = new DiskMap(path);
         diskMap.put("key", "val");
@@ -101,7 +101,7 @@ public class DiskMapTest {
     @Test
     @DisplayName("Putting a value that's not created yet creates a new file")
     void put_doesntExist_fileCreated() throws IOException {
-        Path path = resources
+        Path path = RESOURCES
             .resolve("restore_my_state");
         var diskMap = new DiskMap(path);
         diskMap.put("key", "val");
@@ -114,7 +114,7 @@ public class DiskMapTest {
     @Test
     @DisplayName("Putting a value that's already in a storage overwrites a file")
     void put_exists_fileOverwritten() throws IOException {
-        Path path = resources
+        Path path = RESOURCES
             .resolve("restore_my_state");
         var diskMap = new DiskMap(path);
         diskMap.put("key", "val");
@@ -128,7 +128,7 @@ public class DiskMapTest {
     @Test
     @DisplayName("When the storage directory is purged KeyValueConsistencyException is thrown on put")
     void put_directoryDeleted_keyValueConsistencyException() throws IOException {
-        Path path = resources
+        Path path = RESOURCES
             .resolve("restore_my_state");
         var diskMap = new DiskMap(path);
         diskMap.put("key", "val");
@@ -145,7 +145,7 @@ public class DiskMapTest {
     @Test
     @DisplayName("Putting all entries from another map")
     void putAll_intersectingMap_success() throws IOException {
-        Path path = resources
+        Path path = RESOURCES
             .resolve("restore_my_state");
         var diskMap = new DiskMap(path);
         diskMap.put("key", "val");
