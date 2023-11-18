@@ -8,10 +8,9 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
 import static java.util.Map.entry;
-import static org.apache.logging.log4j.core.net.Protocol.TCP;
-import static org.apache.logging.log4j.core.net.Protocol.UDP;
 
 public class PortScanner {
+    @SuppressWarnings("MultipleStringLiterals")
     private static final Map<Integer, String> KNOWN_PORTS = Map.ofEntries(
         entry(80, "HyperText Transfer Protocol"), entry(21, "File Transfer Protocol"),
         entry(25, "Simple Mail Transfer Protocol"), entry(22, "Secure Shell"),
