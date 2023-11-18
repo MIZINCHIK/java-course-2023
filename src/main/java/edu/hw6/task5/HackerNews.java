@@ -15,7 +15,8 @@ public class HackerNews {
     private static final URI TOP_STORIES = PREFIX.resolve("topstories.json");
     private static final String ITEM = "item/";
     private static final String JSON = ".json";
-    private static final Pattern pattern = Pattern.compile(".*\"title\":\"([^\"]*)\".*");
+    private static final Pattern PATTERN = Pattern.compile(".*\"title\":\"([^\"]*)\".*");
+    private static final int MAX_WAIT_SECONDS = 10;
 
     private HackerNews() {
         throw new IllegalStateException();
@@ -25,7 +26,7 @@ public class HackerNews {
         HttpRequest request = HttpRequest.newBuilder()
             .uri(TOP_STORIES)
             .GET()
-            .timeout(Duration.of(10, ChronoUnit.SECONDS))
+            .timeout(Duration.of(MAX_WAIT_SECONDS, ChronoUnit.SECONDS))
             .build();
         try (var client = newHttpClient()) {
             var response = client.send(request, HttpResponse.BodyHandlers.ofString());
@@ -40,11 +41,11 @@ public class HackerNews {
         HttpRequest request = HttpRequest.newBuilder()
             .uri(news)
             .GET()
-            .timeout(Duration.of(10, ChronoUnit.SECONDS))
+            .timeout(Duration.of(MAX_WAIT_SECONDS, ChronoUnit.SECONDS))
             .build();
         try (var client = newHttpClient()) {
             var response = client.send(request, HttpResponse.BodyHandlers.ofString());
-            Matcher matcher = pattern.matcher(response.body());
+            Matcher matcher = PATTERN.matcher(response.body());
             if (matcher.find()) {
                 return matcher.group(1);
             }
