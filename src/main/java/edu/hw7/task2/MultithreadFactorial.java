@@ -1,7 +1,6 @@
 package edu.hw7.task2;
 
 import java.math.BigInteger;
-import java.util.NoSuchElementException;
 import java.util.stream.Stream;
 
 public class MultithreadFactorial {
