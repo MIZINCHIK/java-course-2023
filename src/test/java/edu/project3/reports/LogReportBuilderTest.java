@@ -74,9 +74,9 @@ public class LogReportBuilderTest {
         ));
         builder.considerLog(new Log(InetAddress.getByName("93.180.71.5"), "user1",
             OffsetDateTime.of(
-                2014, 2, 1,
+                2014, 6, 13,
                 1, 1, 1, 0, ZoneOffset.of("+0000")
-            ), "GET",
+            ), "POST",
             "/resource3", null, 402, 1000000, null, null
         ));
         builder.considerLog(new Log(InetAddress.getByName("93.180.71.6"), "user1",
