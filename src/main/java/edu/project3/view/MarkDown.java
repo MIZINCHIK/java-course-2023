@@ -12,11 +12,14 @@ public class MarkDown {
     public static final String STARTING_DATE = "Starting date";
     public static final String ENDING_DATE = "Ending date";
     public static final String REQUESTS_AMOUNT = "Amount of requests";
-    public static final String AVERAGE_REQUEST_SIZE = "Average request size";
+    public static final String AVERAGE_RESPONSE_SIZE = "Average response size";
+    public static final String MAX_RESPONSE_SIZE = "Max response size";
     public static final String RESOURCES_HEADER = "## Requested Resources";
     public static final String RESOURCES_HEADERS = "|Resource|Amount|";
     public static final String RESPONSE_HEADER = "## Response codes";
     public static final String RESPONSE_HEADERS = "|Code|Name|Amount|";
+    public static final String POPULAR_METHOD_HEADER = "## Most Popular method on Friday the 13th";
+    public static final String POPULAR_METHOD_HEADERS = "|Method Name|Amount|";
     public static final String DOUBLE_SEPARATOR = "|-|-|";
     public static final String TRIPLE_SEPARATOR = "|-|-|-|";
 
@@ -38,7 +41,9 @@ public class MarkDown {
             .append(lineSeparator());
         builder.append("|" + ENDING_DATE + "|").append(report.endDate().toString()).append("|").append(lineSeparator());
         builder.append("|" + REQUESTS_AMOUNT + "|").append(report.requestsAmount()).append("|").append(lineSeparator());
-        builder.append("|" + AVERAGE_REQUEST_SIZE + "|").append(report.averageResponseSize()).append("|")
+        builder.append("|" + AVERAGE_RESPONSE_SIZE + "|").append(report.averageResponseSize()).append("|")
+            .append(lineSeparator());
+        builder.append("|" + MAX_RESPONSE_SIZE + "|").append(report.maxResponseSize()).append("|")
             .append(lineSeparator());
         builder.append(RESOURCES_HEADER).append(lineSeparator())
             .append(RESOURCES_HEADERS).append(lineSeparator()).append(DOUBLE_SEPARATOR).append(lineSeparator());
@@ -52,6 +57,11 @@ public class MarkDown {
             builder.append("|").append(code.getKey()).append("|").append(getMessage(code.getKey()))
                 .append("|").append(code.getValue()).append("|").append(lineSeparator());
         }
+        builder.append(POPULAR_METHOD_HEADER).append(lineSeparator())
+            .append(POPULAR_METHOD_HEADERS).append(lineSeparator()).append(DOUBLE_SEPARATOR).append(lineSeparator());
+        var method = report.mostFrequentMethodOnFridayThe13Th();
+        builder.append("|").append(method.getKey()).append("|").append(method.getValue())
+            .append("|").append(lineSeparator());
         return builder.toString();
     }
 }

@@ -9,6 +9,7 @@ import java.util.List;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
+import static java.util.Map.entry;
 import static org.assertj.core.api.AssertionsForClassTypes.assertThat;
 
 public class LogReportBuilderTest {
@@ -80,14 +81,14 @@ public class LogReportBuilderTest {
         ));
         builder.considerLog(new Log(InetAddress.getByName("93.180.71.6"), "user1",
             OffsetDateTime.of(
-                2014, 2, 1,
+                2014, 6, 13,
                 1, 1, 1, 0, ZoneOffset.of("+0000")
             ), "GET",
             "/resource2", null, 401, 200, null, null
         ));
         builder.considerLog(new Log(InetAddress.getByName("93.180.71.6"), "user1",
             OffsetDateTime.of(
-                2014, 2, 1,
+                2014, 6, 13,
                 1, 1, 1, 0, ZoneOffset.of("+0000")
             ), "GET",
             "/resource3", null, 300, 10, null, null
@@ -118,5 +119,7 @@ public class LogReportBuilderTest {
         assertThat(topResources.get(0).getValue()).isEqualTo(4);
         assertThat(topResources.get(1).getValue()).isEqualTo(3);
         assertThat(topResources.get(2).getValue()).isEqualTo(2);
+        assertThat(report.maxResponseSize()).isEqualTo(1000000);
+        assertThat(report.mostFrequentMethodOnFridayThe13Th()).isEqualTo(entry("GET", 2));
     }
 }
