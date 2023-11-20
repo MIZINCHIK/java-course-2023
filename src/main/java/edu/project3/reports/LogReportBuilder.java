@@ -43,7 +43,10 @@ public class LogReportBuilder {
         totalResponseSize += log.bytesSent();
         maxResponseSize = Math.max(maxResponseSize, log.bytesSent());
         if (log.timeLocal().getDayOfMonth() == 13 && log.timeLocal().getDayOfWeek() == DayOfWeek.FRIDAY) {
-            methodsOnFridayThe13Th.put(log.requestMethod(), methodsOnFridayThe13Th.getOrDefault(log.requestMethod(), 0) + 1);
+            methodsOnFridayThe13Th.put(
+                log.requestMethod(),
+                methodsOnFridayThe13Th.getOrDefault(log.requestMethod(), 0) + 1
+            );
         }
     }
 
