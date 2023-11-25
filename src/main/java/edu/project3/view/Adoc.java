@@ -1,6 +1,7 @@
 package edu.project3.view;
 
 import edu.project3.reports.LogReport;
+import java.util.Collection;
 import static edu.project3.logs.HttpResponseCode.getMessage;
 import static java.lang.System.lineSeparator;
 
@@ -8,7 +9,7 @@ public class Adoc {
     public static final String TABLE_BORDER = "|=======================";
     public static final String OPTIONS = "[options=\"header\"]";
     public static final String GENERAL_HEADER = ".General information";
-    public static final String GENERAL_HEADERS = "|Metric|Value(s)";
+    public static final String GENERAL_COLUMNS = "|Metric|Value(s)";
     public static final String SOURCES = "Sources";
     public static final String STARTING_DATE = "Starting date";
     public static final String ENDING_DATE = "Ending date";
@@ -16,11 +17,11 @@ public class Adoc {
     public static final String AVERAGE_RESPONSE_SIZE = "Average response size";
     public static final String MAX_RESPONSE_SIZE = "Max response size";
     public static final String RESOURCES_HEADER = ".Requested Resources";
-    public static final String RESOURCES_HEADERS = "|Resource|Amount";
+    public static final String RESOURCES_COLUMNS = "|Resource|Amount";
     public static final String RESPONSE_HEADER = ".Response codes";
-    public static final String RESPONSE_HEADERS = "|Code|Name|Amount";
+    public static final String RESPONSE_COLUMNS = "|Code|Name|Amount";
     public static final String POPULAR_METHOD_HEADER = ".Most Popular method on Friday the 13th";
-    public static final String POPULAR_METHOD_HEADERS = "|Method Name|Amount";
+    public static final String POPULAR_METHOD_COLUMNS = "|Method Name|Amount";
 
     private Adoc() {
         throw new IllegalStateException();
@@ -28,43 +29,72 @@ public class Adoc {
 
     public static String formatReport(LogReport report) {
         StringBuilder builder = new StringBuilder();
-        builder.append(GENERAL_HEADER).append(lineSeparator()).append(OPTIONS).append(lineSeparator())
-            .append(TABLE_BORDER).append(lineSeparator())
-            .append(GENERAL_HEADERS).append(lineSeparator());
-        int sourcesAmount = report.sources().size();
-        builder.append(".").append(sourcesAmount).append("+^.^|").append(SOURCES);
-        for (String source : report.sources()) {
-            builder.append("|").append(source).append(lineSeparator());
-        }
-        builder.append("|" + STARTING_DATE + "|").append(report.startDate().toString()).append(lineSeparator());
-        builder.append("|" + ENDING_DATE + "|").append(report.endDate().toString()).append(lineSeparator());
-        builder.append("|" + REQUESTS_AMOUNT + "|").append(report.requestsAmount()).append(lineSeparator());
-        builder.append("|" + AVERAGE_RESPONSE_SIZE + "|").append(report.averageResponseSize()).append(lineSeparator());
-        builder.append("|" + MAX_RESPONSE_SIZE + "|").append(report.maxResponseSize()).append(lineSeparator());
-        builder.append(TABLE_BORDER).append(lineSeparator());
-        builder.append(RESOURCES_HEADER).append(lineSeparator()).append(OPTIONS).append(lineSeparator())
-            .append(TABLE_BORDER).append(lineSeparator())
-            .append(RESOURCES_HEADERS).append(lineSeparator());
+        appendTableTop(builder, GENERAL_HEADER, OPTIONS, GENERAL_COLUMNS);
+        appendMultipleValueRow(builder, SOURCES, report.sources());
+        appendSingleValueDoubleRow(builder, STARTING_DATE, report.startDate().toString());
+        appendSingleValueDoubleRow(builder, ENDING_DATE, report.endDate().toString());
+        appendSingleValueDoubleRow(builder, REQUESTS_AMOUNT, String.valueOf(report.requestsAmount()));
+        appendSingleValueDoubleRow(builder, AVERAGE_RESPONSE_SIZE, String.valueOf(report.averageResponseSize()));
+        appendSingleValueDoubleRow(builder, MAX_RESPONSE_SIZE, String.valueOf(report.maxResponseSize()));
+        appendTableBottom(builder);
+        appendTableTop(builder, RESOURCES_HEADER, OPTIONS, RESOURCES_COLUMNS);
         for (var resource : report.mostFrequentResources()) {
-            builder.append("|").append(resource.getKey()).append("|").append(resource.getValue())
-                .append(lineSeparator());
+            appendSingleValueDoubleRow(builder, resource.getKey(), String.valueOf(resource.getValue()));
         }
-        builder.append(TABLE_BORDER).append(lineSeparator());
-        builder.append(RESPONSE_HEADER).append(lineSeparator()).append(OPTIONS).append(lineSeparator())
-            .append(TABLE_BORDER).append(lineSeparator())
-            .append(RESPONSE_HEADERS).append(lineSeparator());
+        appendTableBottom(builder);
+        appendTableTop(builder, RESPONSE_HEADER, OPTIONS, RESPONSE_COLUMNS);
         for (var code : report.mostFrequentResponseCodes()) {
-            builder.append("|").append(code.getKey()).append("|").append(getMessage(code.getKey()))
-                .append("|").append(code.getValue()).append(lineSeparator());
+            appendSingleValueMultipleRow(builder, String.valueOf(code.getKey()), getMessage(code.getKey()),
+                String.valueOf(code.getValue())
+            );
         }
-        builder.append(TABLE_BORDER).append(lineSeparator());
-        builder.append(POPULAR_METHOD_HEADER).append(lineSeparator()).append(OPTIONS).append(lineSeparator())
-            .append(TABLE_BORDER).append(lineSeparator())
-            .append(POPULAR_METHOD_HEADERS).append(lineSeparator());
+        appendTableBottom(builder);
+        appendTableTop(builder, POPULAR_METHOD_HEADER, OPTIONS, POPULAR_METHOD_COLUMNS);
         var method = report.mostFrequentMethodOnFridayThe13Th();
-        builder.append("|").append(method.getKey()).append("|").append(method.getValue())
-            .append(lineSeparator());
-        builder.append(TABLE_BORDER).append(lineSeparator());
+        appendSingleValueDoubleRow(builder, method.getKey(), String.valueOf(method.getValue()));
+        appendTableBottom(builder);
         return builder.toString();
+    }
+
+    public static StringBuilder appendTableTop(
+        StringBuilder builder,
+        String header,
+        String options,
+        String columnNames
+    ) {
+        return builder.append(header).append(lineSeparator())
+            .append(options).append(lineSeparator())
+            .append(TABLE_BORDER).append(lineSeparator())
+            .append(columnNames).append(lineSeparator());
+    }
+
+    public static StringBuilder appendTableBottom(
+        StringBuilder builder
+    ) {
+        return builder.append(TABLE_BORDER).append(lineSeparator());
+    }
+
+    public static StringBuilder appendSingleValueDoubleRow(StringBuilder builder, String rowName, String value) {
+        return builder.append("|").append(rowName).append("|").append(value).append(lineSeparator());
+    }
+
+    public static StringBuilder appendSingleValueMultipleRow(StringBuilder builder, String rowName, String... values) {
+        builder.append("|").append(rowName);
+        for (String value : values) {
+            builder.append("|").append(value);
+        }
+        return builder.append(lineSeparator());
+    }
+
+    public static StringBuilder appendMultipleValueRow(
+        StringBuilder builder,
+        String rowName,
+        Collection<String> values
+    ) {
+        builder.append(".").append(values.size()).append("+^.^|").append(rowName);
+        for (String value : values) {
+            builder.append("|").append(value).append(lineSeparator());
+        }
+        return builder;
     }
 }
