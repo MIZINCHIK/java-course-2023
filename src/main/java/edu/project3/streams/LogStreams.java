@@ -24,7 +24,10 @@ public class LogStreams {
     }
 
     private static Stream<Log> parseLogsInStream(Stream<String> strings) {
-        return strings.filter(Log::looksLikeLog).map(Log::parseLog).filter(Optional::isPresent).map(Optional::get);
+        return strings.filter(Log::looksLikeLog)
+            .map(Log::parseLog)
+            .filter(Optional::isPresent)
+            .map(Optional::get);
     }
 
     private static Stream<Log> createStreamFromPathsAndUrls(Set<String> files, Set<String> urls) {
