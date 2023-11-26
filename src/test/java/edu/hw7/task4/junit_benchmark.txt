@@ -1,0 +1,49 @@
+Результаты примитивного бенчмарка PiMonteCarloSimpleBenchmark на моей машине (4 ядра, 8 потоков)
+
+Calculating Pi 10_000_000 iterations 1 thread
+Absolute error: 3.4854641020709565E-4
+Elapsed time in nanoseconds: 1.32173586E8
+
+Calculating Pi 10_000_000 iterations 2 threads
+Absolute error: 1.0214641020667159E-4
+Elapsed time in nanoseconds: 8.4634273E7
+
+Calculating Pi 10_000_000 iterations 4 threads
+Absolute error: 0.0011130535897931892
+Elapsed time in nanoseconds: 4.4059198E7
+
+Calculating Pi 10_000_000 iterations 8 threads
+Absolute error: 7.438535897930088E-4
+Elapsed time in nanoseconds: 3.5682219E7
+
+Calculating Pi 100_000_000 iterations 1 thread
+Absolute error: 6.0786410206681296E-5
+Elapsed time in nanoseconds: 9.18618448E8
+
+Calculating Pi 100_000_000 iterations 2 threads
+Absolute error: 1.9625358979302732E-4
+Elapsed time in nanoseconds: 4.50648476E8
+
+Calculating Pi 100_000_000 iterations 4 threads
+Absolute error: 1.441064102070122E-4
+Elapsed time in nanoseconds: 2.36127296E8
+
+Calculating Pi 100_000_000 iterations 8 threads
+Absolute error: 6.173358979300048E-5
+Elapsed time in nanoseconds: 2.07869142E8
+
+Calculating Pi 1_000_000_000 iterations 1 thread
+Absolute error: 2.7570410206845253E-5
+Elapsed time in nanoseconds: 8.764508767E9
+
+Calculating Pi 1_000_000_000 iterations 2 threads
+Absolute error: 3.080241020692043E-5
+Elapsed time in nanoseconds: 4.397887893E9
+
+Calculating Pi 1_000_000_000 iterations 4 threads
+Absolute error: 1.1661841020682573E-4
+Elapsed time in nanoseconds: 2.311754945E9
+
+Calculating Pi 1_000_000_000 iterations 8 threads
+Absolute error: 5.2005589793235885E-5
+Elapsed time in nanoseconds: 1.987883395E9

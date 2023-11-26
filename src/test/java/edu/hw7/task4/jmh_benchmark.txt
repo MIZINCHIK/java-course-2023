@@ -1,0 +1,13 @@
+Benchmark                                                                       Mode  Cnt           Score            Error  Units
+PiMonteCarloBenchmark.calculatePi_singleThread10000000Points_somewhatNear       avgt    5    88532136.674 ±     950221.709  ns/op
+PiMonteCarloBenchmark.calculatePi_doubleThread10000000Points_somewhatNear       avgt    5    45345938.346 ±     362949.604  ns/op
+PiMonteCarloBenchmark.calculatePi_quadrupleThread10000000Points_somewhatNear    avgt    5    47230407.153 ±    3446322.952  ns/op
+PiMonteCarloBenchmark.calculatePi_octupleThread10000000Points_somewhatNear      avgt    5    27739287.578 ±    3302663.904  ns/op
+PiMonteCarloBenchmark.calculatePi_singleThread100000000Points_somewhatNear      avgt    5   929918869.327 ±   79898224.754  ns/op
+PiMonteCarloBenchmark.calculatePi_doubleThread100000000Points_somewhatNear      avgt    5   476787046.610 ±   85308761.218  ns/op
+PiMonteCarloBenchmark.calculatePi_quadrupleThread100000000Points_somewhatNear   avgt    5   465315656.594 ±   60614584.438  ns/op
+PiMonteCarloBenchmark.calculatePi_octupleThread100000000Points_somewhatNear     avgt    5   314302683.758 ±   57153324.321  ns/op
+PiMonteCarloBenchmark.calculatePi_singleThread1000000000Points_somewhatNear     avgt    5  8803883682.700 ±  124519767.590  ns/op
+PiMonteCarloBenchmark.calculatePi_doubleThread1000000000Points_somewhatNear     avgt    5  4962314946.833 ±  557855992.078  ns/op
+PiMonteCarloBenchmark.calculatePi_quadrupleThread1000000000Points_somewhatNear  avgt    5  3616559932.383 ± 3336794961.512  ns/op
+PiMonteCarloBenchmark.calculatePi_octupleThread1000000000Points_somewhatNear    avgt    5  2890250575.600 ±  802566216.121  ns/op
