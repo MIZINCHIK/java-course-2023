@@ -2,7 +2,6 @@ package edu.hw8.task1;
 
 import java.io.IOException;
 import java.net.InetSocketAddress;
-import java.net.ServerSocket;
 import java.nio.ByteBuffer;
 import java.nio.channels.SocketChannel;
 import java.util.HashMap;
@@ -19,7 +18,7 @@ import static org.assertj.core.api.AssertionsForClassTypes.assertThat;
 public class QuoteServerTest {
     @Test
     @DisplayName("General test of the quote server")
-    void general_whenServerRunning_thenResponsesGot() {
+    void general_whenServerRunning_thenResponsesGot() throws InterruptedException {
         try(var server = new QuoteServer()) {
             Map<String, String> quotes = new HashMap<>();
             for (int i = 0; i < 1000; i++) {
@@ -30,6 +29,7 @@ public class QuoteServerTest {
             }
             int port = getAvailablePort();
             server.start(port);
+            Thread.sleep(1000);
             var client = SocketChannel.open(new InetSocketAddress(SERVER_HOST, port));
             for (var entry : quotes.entrySet()) {
                 assertThat(sendRequest(client, entry.getKey())).isEqualTo(entry.getValue());
