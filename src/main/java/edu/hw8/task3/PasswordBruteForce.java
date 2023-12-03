@@ -12,6 +12,8 @@ import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
 
 public class PasswordBruteForce {
+    private static final int HEX_BASE = 16;
+
     private PasswordBruteForce() {
         throw new IllegalStateException();
     }
@@ -27,7 +29,12 @@ public class PasswordBruteForce {
             for (int i = 0; i < numberOfThreads; i++) {
                 int index = i;
                 CompletableFuture.runAsync(
-                    () -> result.putAll(bruteForcePasswordSingleThreadStep(concurrentUsers, alphabet, numberOfThreads, index)),
+                    () -> result.putAll(bruteForcePasswordSingleThreadStep(
+                        concurrentUsers,
+                        alphabet,
+                        numberOfThreads,
+                        index
+                    )),
                     pool
                 );
             }
@@ -55,7 +62,7 @@ public class PasswordBruteForce {
                 index += step;
                 md5.update(nextPassword.getBytes());
                 BigInteger auxiliaryNumber = new BigInteger(1, md5.digest());
-                String hash = auxiliaryNumber.toString(16);
+                String hash = auxiliaryNumber.toString(HEX_BASE);
                 if (keySet.contains(hash)) {
                     result.put(users.get(hash), nextPassword);
                     users.remove(hash);
@@ -70,10 +77,11 @@ public class PasswordBruteForce {
 
     private static String getPasswordByNumber(long number, CharSequence alphabet) {
         int base = alphabet.length();
+        long internalNumber = number;
         StringBuilder result = new StringBuilder();
-        while (number > 0) {
-            result.append(alphabet.charAt((int) (number % base)));
-            number /= base;
+        while (internalNumber > 0) {
+            result.append(alphabet.charAt((int) (internalNumber % base)));
+            internalNumber /= base;
         }
         return result.toString();
     }
