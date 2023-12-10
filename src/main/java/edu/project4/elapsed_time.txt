@@ -1,0 +1,17 @@
+Примеры затраченного времени для разных параметров
+(4 ядра, 8 потоков -> в тредпуле должно быть 8 тредов):
+
+3_000_000 samples, 100 iterations per sample, gamma 2.2, symmetry 1:
+single - 133774233598
+multi - 23272916556
+5.748 times faster
+
+30_000_000 samples, 10 iterations per sample, gamma 2.2, symmetry 1:
+single - 193931256087
+multi - 31997219892
+6.061 times faster
+
+300_000 samples, 100 iterations per sample, gamma 2.2, symmetry 4:
+single - 41221775310
+multi - 7998073513
+5.154 times faster
