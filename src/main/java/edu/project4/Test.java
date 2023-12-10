@@ -40,7 +40,6 @@ public class Test {
         ProcessingParameters parameters =
             new ProcessingParameters(3_000_000, (short) 100, new Random().nextLong(), 2.2, 1);
         Renderer renderer = new MultiThreadRenderer();
-        long start = System.nanoTime();
         renderer.render(
             image,
             new Rectangle(3, 3),
@@ -54,7 +53,6 @@ public class Test {
         save(image, image1, ImageFormat.PNG);
         renderer = new SingleThreadRenderer();
         image = FractalImage.create(2000, 2000);
-        start = System.nanoTime();
         renderer.render(
             image,
             new Rectangle(3, 3),
