@@ -23,11 +23,7 @@ public class HackerNews {
     }
 
     public static long[] hackerNewsTopStories() {
-        HttpRequest request = HttpRequest.newBuilder()
-            .uri(TOP_STORIES)
-            .GET()
-            .timeout(Duration.of(MAX_WAIT_SECONDS, ChronoUnit.SECONDS))
-            .build();
+        HttpRequest request = buildRequest(TOP_STORIES);
         try (var client = newHttpClient()) {
             var response = client.send(request, HttpResponse.BodyHandlers.ofString());
             return convertStringToArray(response.body());
@@ -38,11 +34,7 @@ public class HackerNews {
 
     public static String news(long id) {
         URI news = PREFIX.resolve(ITEM).resolve(id + JSON);
-        HttpRequest request = HttpRequest.newBuilder()
-            .uri(news)
-            .GET()
-            .timeout(Duration.of(MAX_WAIT_SECONDS, ChronoUnit.SECONDS))
-            .build();
+        HttpRequest request = buildRequest(news);
         try (var client = newHttpClient()) {
             var response = client.send(request, HttpResponse.BodyHandlers.ofString());
             Matcher matcher = PATTERN.matcher(response.body());
@@ -63,5 +55,13 @@ public class HackerNews {
             result[i] = Long.parseLong(splitted[i]);
         }
         return result;
+    }
+
+    private static HttpRequest buildRequest(URI uri) {
+        return HttpRequest.newBuilder()
+            .uri(uri)
+            .GET()
+            .timeout(Duration.of(MAX_WAIT_SECONDS, ChronoUnit.SECONDS))
+            .build();
     }
 }

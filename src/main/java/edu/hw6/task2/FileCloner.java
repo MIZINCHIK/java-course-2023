@@ -3,8 +3,11 @@ package edu.hw6.task2;
 import java.io.IOException;
 import java.nio.file.Files;
 import java.nio.file.Path;
+import java.util.Objects;
 
 public class FileCloner {
+    private static final String INCORRECT_PATH = "Couldn't find the file by the path";
+
     private FileCloner() {
         throw new IllegalStateException();
     }
@@ -22,11 +25,9 @@ public class FileCloner {
     }
 
     private static Path constructCloneName(Path file) {
-        if (file == null) {
-            throw new NullPointerException();
-        }
+        Objects.requireNonNull(file);
         if (!Files.isRegularFile(file) || !Files.exists(file)) {
-            throw new IllegalArgumentException();
+            throw new IllegalArgumentException(INCORRECT_PATH);
         }
         String fileName = file.getFileName().toString();
         String[] tokens = getNameExtension(fileName);
