@@ -198,7 +198,7 @@
                     <configuration>
                         <excludes>
                             <exclude>
-                                edu/hw11/task2/**/ArithmeticUtils.class
+                                edu/hw11/task2/**
                             </exclude>
                         </excludes>
                     </configuration>
