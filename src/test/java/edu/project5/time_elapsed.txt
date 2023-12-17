@@ -1,0 +1,7 @@
+# Run complete. Total time: 00:04:35
+
+Benchmark                              Mode  Cnt   Score   Error  Units
+ReflectionBenchmark.directAccess       avgt    5   0.742 ± 0.013  ns/op
+ReflectionBenchmark.lambdaMetafactory  avgt    5   1.189 ± 0.010  ns/op
+ReflectionBenchmark.methodHandles      avgt    5   6.005 ± 2.141  ns/op
+ReflectionBenchmark.reflection         avgt    5  10.428 ± 0.497  ns/op

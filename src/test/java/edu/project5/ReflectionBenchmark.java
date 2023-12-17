@@ -85,7 +85,7 @@ public class ReflectionBenchmark {
     }
 
     @Benchmark
-    public void lambdaMetafactory(Blackhole bh) throws Throwable {
+    public void lambdaMetafactory(Blackhole bh) {
         String name = dynamicStudent.name(student);
         bh.consume(name);
     }
