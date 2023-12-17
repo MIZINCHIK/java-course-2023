@@ -1,12 +1,12 @@
 package edu.hw11.task1;
 
+import java.lang.reflect.InvocationTargetException;
 import net.bytebuddy.ByteBuddy;
 import net.bytebuddy.dynamic.DynamicType;
 import net.bytebuddy.implementation.FixedValue;
 import net.bytebuddy.matcher.ElementMatchers;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
-import java.lang.reflect.InvocationTargetException;
 import static org.assertj.core.api.AssertionsForClassTypes.assertThat;
 
 public class HelloBuddyTest {
@@ -16,7 +16,7 @@ public class HelloBuddyTest {
         throws InstantiationException, IllegalAccessException, NoSuchMethodException, InvocationTargetException {
         String toStringFixed = "Hello, ByteBuddy!";
         Class<?> dynamicType;
-        try(DynamicType.Unloaded<?> unloaded = new ByteBuddy()
+        try (DynamicType.Unloaded<?> unloaded = new ByteBuddy()
             .subclass(Object.class)
             .method(ElementMatchers.named("toString"))
             .intercept(FixedValue.value(toStringFixed))

@@ -1,5 +1,7 @@
 package edu.hw11.task2;
 
+import java.util.Random;
+import java.util.concurrent.ThreadLocalRandom;
 import net.bytebuddy.ByteBuddy;
 import net.bytebuddy.agent.ByteBuddyAgent;
 import net.bytebuddy.dynamic.loading.ClassReloadingStrategy;
@@ -7,9 +9,6 @@ import net.bytebuddy.implementation.MethodDelegation;
 import net.bytebuddy.matcher.ElementMatchers;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
-import java.util.Random;
-import java.util.concurrent.ThreadLocalRandom;
-import static net.bytebuddy.matcher.ElementMatchers.named;
 import static org.assertj.core.api.AssertionsForClassTypes.assertThat;
 
 public class MethodModifierTest {
