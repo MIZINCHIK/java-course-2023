@@ -5,6 +5,7 @@ import edu.project2.maze.cells.Coordinate;
 import java.util.List;
 
 public final class Maze {
+    private static final String INCORRECT_PATH = "Provided path is incorrect";
     private final int height;
     private final int width;
     private final CellType[][] grid;
@@ -66,6 +67,10 @@ public final class Maze {
 
     public void markPath(List<Coordinate> path) {
         for (Coordinate coordinate : path) {
+            if (isCoordinateOffLimits(coordinate)
+                || grid[coordinate.row()][coordinate.column()] != CellType.PASSAGE) {
+                throw new IllegalArgumentException(INCORRECT_PATH);
+            }
             grid[coordinate.row()][coordinate.column()] = CellType.PATH;
         }
     }
