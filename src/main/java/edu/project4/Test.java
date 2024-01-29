@@ -48,8 +48,8 @@ public class Test {
             parameters
         );
         Path images = Path.of(System.getProperty("user.dir")).resolve("images");
-        Path image1 = images.resolve("image27.png");
-        Path image2 = images.resolve("image28.png");
+        Path image1 = images.resolve("image1.png");
+        Path image2 = images.resolve("image2.png");
         save(image, image1, ImageFormat.PNG);
         renderer = new SingleThreadRenderer();
         image = FractalImage.create(2000, 2000);

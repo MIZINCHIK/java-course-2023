@@ -80,7 +80,10 @@ public class MultiThreadRenderer implements Renderer {
                 for (int s = 0; s < parameters.symmetry(); theta2 += angleStep, s++) {
                     point = rotate(point, theta2);
                     if (world.contains(point)) {
-                        canvas.setPixel(point, world, affine.getRed(), affine.getGreen(), affine.getBlue());
+                        canvas.setPixel(
+                            getCoordinateInImage(point.x(), world.width(), canvas.width()),
+                            getCoordinateInImage(point.y(), world.height(), canvas.height()),
+                            affine.getRed(), affine.getGreen(), affine.getBlue());
                     }
                 }
             }
@@ -88,6 +91,10 @@ public class MultiThreadRenderer implements Renderer {
         if (latch != null) {
             latch.countDown();
         }
+    }
+
+    protected static int getCoordinateInImage(double worldCoordinate, double worldMax, int imageMax) {
+        return (int) (worldCoordinate / worldMax * imageMax + imageMax / 2);
     }
 
     protected static void correction(FractalImage image, double gamma) {
