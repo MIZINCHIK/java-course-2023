@@ -15,7 +15,8 @@ import net.bytebuddy.jar.asm.MethodVisitor;
 import net.bytebuddy.jar.asm.Opcodes;
 import net.bytebuddy.matcher.ElementMatchers;
 import org.junit.jupiter.api.DisplayName;
-import org.junit.jupiter.api.Test;
+import org.junit.jupiter.params.ParameterizedTest;
+import org.junit.jupiter.params.provider.CsvFileSource;
 import static org.assertj.core.api.AssertionsForClassTypes.assertThat;
 
 public class CodeAppenderTest {
@@ -113,9 +114,10 @@ public class CodeAppenderTest {
         public abstract long fib(int n);
     }
 
-    @Test
+    @ParameterizedTest
+    @CsvFileSource(files = "src/test/resources/edu/hw11/task3/fib.csv")
     @DisplayName("Modifying a method in another class")
-    void sum_whenModified_thenDifferentResult()
+    void sum_whenModified_thenDifferentResult(int index, long result)
         throws NoSuchMethodException, InvocationTargetException, InstantiationException, IllegalAccessException {
         FibonacciAbstract fibonacci;
         try (var unloaded = new ByteBuddy()
@@ -130,14 +132,6 @@ public class CodeAppenderTest {
                 .getDeclaredConstructor()
                 .newInstance();
         }
-        assertThat(fibonacci.fib(0)).isEqualTo(0);
-        assertThat(fibonacci.fib(1)).isEqualTo(1);
-        assertThat(fibonacci.fib(2)).isEqualTo(1);
-        assertThat(fibonacci.fib(3)).isEqualTo(2);
-        assertThat(fibonacci.fib(4)).isEqualTo(3);
-        assertThat(fibonacci.fib(5)).isEqualTo(5);
-        assertThat(fibonacci.fib(6)).isEqualTo(8);
-        assertThat(fibonacci.fib(19)).isEqualTo(4181);
-        assertThat(fibonacci.fib(92)).isEqualTo(7540113804746346429L);
+        assertThat(fibonacci.fib(index)).isEqualTo(result);
     }
 }
